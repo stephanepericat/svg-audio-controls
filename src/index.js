@@ -2,8 +2,7 @@ import "./sass/index.scss";
 
 import SVG from "svg.js";
 
-const App = new SVG(document.querySelector(".container"));
-
+// constants
 const radius = 100;
 const padding = 20;
 const size = radius + padding * 2;
@@ -13,6 +12,9 @@ const offsetLeft = 300;
 const fillColor = "#fff";
 const strokeColor = "#111";
 const backgroundColor = "#ccc";
+
+// SVG app
+const App = new SVG(document.querySelector(".container"));
 
 // knob group
 const knob = App.group();
