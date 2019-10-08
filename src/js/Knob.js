@@ -22,7 +22,7 @@ export default class Knob extends AudioControl {
     this._createKnob();
     this._createNeedle();
 
-    this._setEventListeners();
+    this._setupEventListeners();
   }
 
   /**
@@ -64,6 +64,13 @@ export default class Knob extends AudioControl {
     return (rad * 360) / (Math.PI * 2);
   }
 
+  _reset() {
+    this._rotate({
+      x: this.centerX,
+      y: this.offsetTop + this.size
+    });
+  }
+
   _rotate(evt) {
     const radian = this._slopeToRadians(
       this.centerX,
@@ -88,18 +95,16 @@ export default class Knob extends AudioControl {
     this._instance.fire("valueChange", { value: this.currentValue });
   }
 
-  _setEventListeners() {
-    this._instance.on("mousedown", e => {
-      this.isRotating = true;
-      this._rotate(e);
-    });
+  _setupEventListeners() {
+    this._instance.on("mousedown", () => (this.isRotating = true));
+    this._ctx.on("mouseup", () => (this.isRotating = false));
+
+    this._instance.on("dblclick", () => this._reset());
 
     this._instance.on("mousemove", e => {
       if (!this.isRotating) return;
       this._rotate(e);
     });
-
-    this._ctx.on("mouseup", () => (this.isRotating = false));
   }
 
   _slopeToRadians(x1, y1, x2, y2) {
