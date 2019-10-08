@@ -1,8 +1,34 @@
 import AudioControl from "./AudioControl";
 
 export default class Knob extends AudioControl {
+  constructor(...args) {
+    super(...args);
+
+    this.angle = 0;
+    this.background = null;
+    this.knob = null;
+    this.needle = null;
+  }
+
   append() {
-    console.log("KNOB", this);
+    this.instance = this.ctx.group();
+    this.instance.move(this.offsetLeft, this.offsetTop);
+
+    this.background = this.instance.rect(this.size, this.size);
+    this.background.fill(this.backgroundColor);
+
+    this.knob = this.instance.circle(this.radius);
+    this.knob.fill(this.fillColor);
+    this.knob.stroke({ color: this.strokeColor, width: this.strokeWidth });
+    this.knob.move(this.padding, this.padding);
+
+    const { x1, y1, x2, y2 } = this.defaultOrientation;
+    this.needle = this.instance.line(x1, y1, x2, y2);
+    this.needle.stroke({
+      color: this.needleColor,
+      linecap: "round",
+      width: this.strokeWidth
+    });
   }
 
   /**
@@ -11,6 +37,14 @@ export default class Knob extends AudioControl {
 
   get backgroundColor() {
     return this.options.backgroundColor || "#ccc";
+  }
+
+  get centerX() {
+    return this.offsetLeft + this.size / 2;
+  }
+
+  get centerY() {
+    return this.offsetTop + this.size / 2;
   }
 
   get defaultOrientation() {

@@ -15,6 +15,7 @@ const k1 = new Knob(App, {
 });
 
 k1.append();
+console.log("KNOB 1: ", k1);
 
 // // knob group
 // const knob = App.group();
