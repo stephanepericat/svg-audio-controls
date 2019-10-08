@@ -1,3 +1,6 @@
+/**
+ * @class AudioControl
+ */
 export default class AudioControl {
   constructor(ctx = null, options = {}) {
     this._ctx = ctx;

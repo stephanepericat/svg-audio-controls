@@ -1,5 +1,9 @@
 import AudioControl from "./AudioControl";
 
+/**
+ * @class Knob
+ * @extends AudioControl
+ */
 export default class Knob extends AudioControl {
   constructor(...args) {
     super(...args);
@@ -13,17 +17,40 @@ export default class Knob extends AudioControl {
   }
 
   append() {
-    this._instance = this._ctx.group();
-    this._instance.move(this.offsetLeft, this.offsetTop);
+    this._createGroup();
+    this._createBackground();
+    this._createKnob();
+    this._createNeedle();
 
+    this._setEventListeners();
+  }
+
+  /**
+   * Private methods
+   */
+
+  _calculcateSlope(x1, y1, x2, y2) {
+    return (y2 - y1) / (x2 - x1);
+  }
+
+  _createBackground() {
     this._background = this._instance.rect(this.size, this.size);
     this._background.fill(this.backgroundColor);
+  }
 
+  _createGroup() {
+    this._instance = this._ctx.group();
+    this._instance.move(this.offsetLeft, this.offsetTop);
+  }
+
+  _createKnob() {
     this._knob = this._instance.circle(this.radius);
     this._knob.fill(this.fillColor);
     this._knob.stroke({ color: this.strokeColor, width: this.strokeWidth });
     this._knob.move(this.padding, this.padding);
+  }
 
+  _createNeedle() {
     const { x1, y1, x2, y2 } = this.defaultOrientation;
     this._needle = this._instance.line(x1, y1, x2, y2);
     this._needle.stroke({
@@ -31,6 +58,52 @@ export default class Knob extends AudioControl {
       linecap: "round",
       width: this.strokeWidth
     });
+  }
+
+  _radiansToDegrees(rad) {
+    return (rad * 360) / (Math.PI * 2);
+  }
+
+  _rotate(evt) {
+    const radian = this._slopeToRadians(
+      this.centerX,
+      this.centerY,
+      evt.x,
+      evt.y
+    );
+
+    this.angle = this._radiansToDegrees(radian);
+
+    const { x1, y1 } = this.defaultOrientation;
+    this._needle.transform({
+      rotation: this.angle - this._zeroOffset,
+      cx: x1,
+      cy: y1
+    });
+
+    this._sendValue();
+  }
+
+  _sendValue() {
+    this._instance.fire("valueChange", { value: this.currentValue });
+  }
+
+  _setEventListeners() {
+    this._instance.on("mousedown", e => {
+      this.isRotating = true;
+      this._rotate(e);
+    });
+
+    this._instance.on("mousemove", e => {
+      if (!this.isRotating) return;
+      this._rotate(e);
+    });
+
+    this._ctx.on("mouseup", () => (this.isRotating = false));
+  }
+
+  _slopeToRadians(x1, y1, x2, y2) {
+    return Math.atan2(y2 - y1, x2 - x1);
   }
 
   /**
@@ -51,6 +124,20 @@ export default class Knob extends AudioControl {
 
   get centerY() {
     return this.offsetTop + this.size / 2;
+  }
+
+  get currentValue() {
+    if (this.angle === 0) {
+      return this.angle;
+    }
+
+    let value = this.angle - this._zeroOffset;
+
+    if (value < 0) {
+      value += 360;
+    }
+
+    return value;
   }
 
   get defaultOrientation() {
@@ -112,5 +199,9 @@ export default class Knob extends AudioControl {
 
   set isRotating(value) {
     this._rotating = value;
+  }
+
+  set onChange(callback) {
+    this._instance.on("valueChange", callback);
   }
 }
