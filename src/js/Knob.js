@@ -4,27 +4,29 @@ export default class Knob extends AudioControl {
   constructor(...args) {
     super(...args);
 
-    this.angle = 0;
-    this.background = null;
-    this.knob = null;
-    this.needle = null;
+    this._angle = 0;
+    this._background = null;
+    this._rotating = false;
+    this._knob = null;
+    this._needle = null;
+    this._zeroOffset = 90;
   }
 
   append() {
-    this.instance = this.ctx.group();
-    this.instance.move(this.offsetLeft, this.offsetTop);
+    this._instance = this._ctx.group();
+    this._instance.move(this.offsetLeft, this.offsetTop);
 
-    this.background = this.instance.rect(this.size, this.size);
-    this.background.fill(this.backgroundColor);
+    this._background = this._instance.rect(this.size, this.size);
+    this._background.fill(this.backgroundColor);
 
-    this.knob = this.instance.circle(this.radius);
-    this.knob.fill(this.fillColor);
-    this.knob.stroke({ color: this.strokeColor, width: this.strokeWidth });
-    this.knob.move(this.padding, this.padding);
+    this._knob = this._instance.circle(this.radius);
+    this._knob.fill(this.fillColor);
+    this._knob.stroke({ color: this.strokeColor, width: this.strokeWidth });
+    this._knob.move(this.padding, this.padding);
 
     const { x1, y1, x2, y2 } = this.defaultOrientation;
-    this.needle = this.instance.line(x1, y1, x2, y2);
-    this.needle.stroke({
+    this._needle = this._instance.line(x1, y1, x2, y2);
+    this._needle.stroke({
       color: this.needleColor,
       linecap: "round",
       width: this.strokeWidth
@@ -35,8 +37,12 @@ export default class Knob extends AudioControl {
    * Getters
    */
 
+  get angle() {
+    return this._angle;
+  }
+
   get backgroundColor() {
-    return this.options.backgroundColor || "#ccc";
+    return this._options.backgroundColor || "#fff";
   }
 
   get centerX() {
@@ -57,27 +63,31 @@ export default class Knob extends AudioControl {
   }
 
   get fillColor() {
-    return this.options.fillColor || "#fff";
+    return this._options.fillColor || "#ccc";
+  }
+
+  get isRotating() {
+    return this._rotating;
   }
 
   get needleColor() {
-    return this.options.needleColor || "#f00";
+    return this._options.needleColor || "#f70";
   }
 
   get offsetLeft() {
-    return this.options.offsetLeft || 0;
+    return this._options.offsetLeft || 0;
   }
 
   get offsetTop() {
-    return this.options.offsetTop || 0;
+    return this._options.offsetTop || 0;
   }
 
   get padding() {
-    return this.options.padding || 10;
+    return this._options.padding || 10;
   }
 
   get radius() {
-    return this.options.radius || 50;
+    return this._options.radius || 50;
   }
 
   get size() {
@@ -85,14 +95,22 @@ export default class Knob extends AudioControl {
   }
 
   get strokeColor() {
-    return this.options.strokeColor || "#111";
+    return this._options.strokeColor || "#333";
   }
 
   get strokeWidth() {
-    return this.options.strokeWidth || 5;
+    return this._options.strokeWidth || 5;
   }
 
-  get zeroOffset() {
-    return 90;
+  /**
+   * Setters
+   */
+
+  set angle(value) {
+    this._angle = value;
+  }
+
+  set isRotating(value) {
+    this._rotating = value;
   }
 }

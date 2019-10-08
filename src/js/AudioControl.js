@@ -1,7 +1,7 @@
 export default class AudioControl {
   constructor(ctx = null, options = {}) {
-    this.ctx = ctx;
-    this.options = options;
-    this.instance = null;
+    this._ctx = ctx;
+    this._options = options;
+    this._instance = null;
   }
 }

@@ -7,11 +7,15 @@ import Knob from "./js/Knob";
 const App = new SVG(document.querySelector(".container"));
 
 const k1 = new Knob(App, {
-  offsetLeft: 300,
-  offsetTop: 100,
-  padding: 20,
-  radius: 100,
-  strokeWidth: 10
+  // backgroundColor: "#ccc",
+  // fillColor: "#fff",
+  // needleColor: "#f00",
+  // offsetLeft: 300,
+  // offsetTop: 100,
+  // padding: 20,
+  // radius: 100,
+  // strokeColor: "#111",
+  // strokeWidth: 10
 });
 
 k1.append();
