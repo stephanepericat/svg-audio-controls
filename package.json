@@ -1,0 +1,51 @@
+{
+  "name": "svg-audio-controls",
+  "version": "1.0.2",
+  "description": "A webpack svg-audio-controls",
+  "main": "dist/main.js",
+  "scripts": {
+    "build": "rimraf ./dist && webpack",
+    "dev": "webpack-dev-server",
+    "test": "jest",
+    "test:ci": "jest --coverageReporters=text-lcov | coveralls"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stephanepericat/svg-audio-controls.git"
+  },
+  "author": "Stephane P. Pericat <contact@pericat.net>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/stephanepericat/svg-audio-controls/issues"
+  },
+  "homepage": "https://github.com/stephanepericat/svg-audio-controls#readme",
+  "devDependencies": {
+    "@babel/core": "^7.6.0",
+    "@babel/preset-env": "^7.6.0",
+    "babel-jest": "^24.9.0",
+    "copy-webpack-plugin": "^5.0.4",
+    "coveralls": "^3.0.6",
+    "css-loader": "^3.2.0",
+    "html-webpack-plugin": "^3.2.0",
+    "husky": "^3.0.5",
+    "jasmine-expect": "^4.0.3",
+    "jest": "^24.9.0",
+    "jest-transform-stub": "^2.0.0",
+    "node-sass": "^4.12.0",
+    "reset-css": "^4.0.1",
+    "rimraf": "^3.0.0",
+    "sass-loader": "^8.0.0",
+    "style-loader": "^1.0.0",
+    "webpack": "^4.40.2",
+    "webpack-cli": "^3.3.8",
+    "webpack-dev-server": "^3.8.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm test"
+    }
+  },
+  "dependencies": {
+    "svg.js": "^2.7.1"
+  }
+}

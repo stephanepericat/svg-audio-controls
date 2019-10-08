@@ -1,0 +1,12 @@
+@import "../../node_modules/reset-css/sass/reset";
+@import "variables";
+
+body,
+html {
+  height: 100%;
+  font-family: $font-family;
+}
+
+.container {
+  height: 100%;
+}
