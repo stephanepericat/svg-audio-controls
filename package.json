@@ -6,8 +6,9 @@
   "scripts": {
     "build": "rimraf ./dist && webpack",
     "dev": "webpack-dev-server",
-    "test": "jest",
-    "test:ci": "jest --coverageReporters=text-lcov | coveralls"
+    "test": "jest --verbose",
+    "test:ci": "jest --coverageReporters=text-lcov | coveralls",
+    "test:watch": "jest --verbose --watch"
   },
   "repository": {
     "type": "git",
