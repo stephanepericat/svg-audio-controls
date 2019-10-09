@@ -234,29 +234,6 @@ describe("Knob > _calculateSlope", () => {
   });
 });
 
-describe("Knob > _createBackground", () => {
-  it("should create a rectangle", () => {
-    const ctx = global.SVGContext;
-    const instance = new Knob();
-    instance._instance = ctx.group();
-
-    instance._createBackground();
-
-    expect(instance._instance.rect).toHaveBeenCalledWith(70, 70);
-  });
-});
-
-describe("Knob > _createGroup", () => {
-  it("should create a group", () => {
-    const ctx = global.SVGContext;
-    const instance = new Knob(ctx);
-
-    instance._createGroup();
-
-    expect(instance._ctx.group).toHaveBeenCalled();
-  });
-});
-
 describe("Knob > _createKnob", () => {
   it("should create a circle", () => {
     const ctx = global.SVGContext;
@@ -316,20 +293,6 @@ describe("Knob > _rotate", () => {
       cx: 35,
       cy: 35,
       rotation: 0
-    });
-  });
-});
-
-describe("Knob > _sendValue", () => {
-  it("should fire an event", () => {
-    const ctx = global.SVGContext;
-    const instance = new Knob();
-    instance._instance = ctx.group();
-
-    instance._sendValue();
-
-    expect(instance._instance.fire).toHaveBeenCalledWith("valueChange", {
-      value: 0
     });
   });
 });

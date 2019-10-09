@@ -17,8 +17,12 @@ export default class Knob extends AudioControl {
   }
 
   append() {
-    this._createGroup();
-    this._createBackground();
+    this._createGroup({ left: this.offsetLeft, top: this.offsetTop });
+    this._createBackground({
+      width: this.size,
+      height: this.size,
+      backgroundColor: this.backgroundColor
+    });
     this._createKnob();
     this._createNeedle();
 
@@ -31,16 +35,6 @@ export default class Knob extends AudioControl {
 
   _calculcateSlope(x1, y1, x2, y2) {
     return (y2 - y1) / (x2 - x1);
-  }
-
-  _createBackground() {
-    this._background = this._instance.rect(this.size, this.size);
-    this._background.fill(this.backgroundColor);
-  }
-
-  _createGroup() {
-    this._instance = this._ctx.group();
-    this._instance.move(this.offsetLeft, this.offsetTop);
   }
 
   _createKnob() {
@@ -88,11 +82,7 @@ export default class Knob extends AudioControl {
       cy: y1
     });
 
-    this._sendValue();
-  }
-
-  _sendValue() {
-    this._instance.fire("valueChange", { value: this.currentValue });
+    this._sendValue(this.currentValue);
   }
 
   _setupEventListeners() {
