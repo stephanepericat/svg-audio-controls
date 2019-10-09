@@ -40,10 +40,13 @@ export default class Switch extends AudioControl {
       this.size - this.borderWidth
     );
     this._switch.fill(this.switchColor);
-    this._moveSwitch({
-      left: this.switchOffset,
-      top: this.switchOffset
-    });
+    this._moveSwitch(
+      {
+        left: this.switchOffset,
+        top: this.switchOffset
+      },
+      false
+    );
   }
 
   _getDimensions() {
@@ -53,8 +56,11 @@ export default class Switch extends AudioControl {
     return { width, height };
   }
 
-  _moveSwitch({ left = 0, top = 0 }) {
-    this._switch.animate(100).move(left, top);
+  _moveSwitch({ left = 0, top = 0 }, animate = true) {
+    if (animate) {
+      return this._switch.animate(100).move(left, top);
+    }
+    this._switch.move(left, top);
   }
 
   _setupEventListeners() {
