@@ -19,7 +19,12 @@ global.SVGContext = {
       on: jest.fn(),
       rect: jest.fn(() => {
         return {
-          fill: jest.fn()
+          fill: jest.fn(),
+          animate: jest.fn(() => {
+            return {
+              move: jest.fn()
+            };
+          })
         };
       })
     };
