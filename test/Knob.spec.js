@@ -3,7 +3,7 @@ import Knob from "../src/js/Knob";
 describe("Knob > constructor", () => {
   it("should extend AudioControl", () => {
     const options = { foo: "bar" };
-    const ctx = global.SVG;
+    const ctx = global.SVGContext;
 
     const instance = new Knob(ctx, options);
 
@@ -13,7 +13,7 @@ describe("Knob > constructor", () => {
 
   it("should set some additional properties", () => {
     const options = { foo: "bar" };
-    const ctx = global.SVG;
+    const ctx = global.SVGContext;
 
     const instance = new Knob(ctx, options);
 
@@ -199,5 +199,159 @@ describe("Knobs > Setters", () => {
     const callback = jest.fn();
     instance.onChange = callback;
     expect(instance._instance.on).toHaveBeenCalledWith("valueChange", callback);
+  });
+});
+
+describe("Knob > append", () => {
+  it("should create the knobn interface", () => {
+    const instance = new Knob();
+    instance._createGroup = jest.fn();
+    instance._createBackground = jest.fn();
+    instance._createKnob = jest.fn();
+    instance._createNeedle = jest.fn();
+    instance._setupEventListeners = jest.fn();
+
+    instance.append();
+
+    expect(instance._createGroup).toHaveBeenCalled();
+    expect(instance._createBackground).toHaveBeenCalled();
+    expect(instance._createKnob).toHaveBeenCalled();
+    expect(instance._createNeedle).toHaveBeenCalled();
+    expect(instance._setupEventListeners).toHaveBeenCalled();
+  });
+});
+
+describe("Knob > _calculateSlope", () => {
+  it("should calculate the slope of the needle", () => {
+    const instance = new Knob();
+    const x1 = 2,
+      y1 = 3,
+      x2 = 5,
+      y2 = 7;
+
+    const slope = instance._calculcateSlope(x1, y1, x2, y2);
+    expect(slope).toEqual(1.3333333333333333);
+  });
+});
+
+describe("Knob > _createBackground", () => {
+  it("should create a rectangle", () => {
+    const ctx = global.SVGContext;
+    const instance = new Knob();
+    instance._instance = ctx.group();
+
+    instance._createBackground();
+
+    expect(instance._instance.rect).toHaveBeenCalledWith(70, 70);
+  });
+});
+
+describe("Knob > _createGroup", () => {
+  it("should create a group", () => {
+    const ctx = global.SVGContext;
+    const instance = new Knob(ctx);
+
+    instance._createGroup();
+
+    expect(instance._ctx.group).toHaveBeenCalled();
+  });
+});
+
+describe("Knob > _createKnob", () => {
+  it("should create a circle", () => {
+    const ctx = global.SVGContext;
+    const instance = new Knob();
+    instance._instance = ctx.group();
+
+    instance._createKnob();
+
+    expect(instance._instance.circle).toHaveBeenCalledWith(50);
+  });
+});
+
+describe("Knob > _createNeedle", () => {
+  it("should create a line", () => {
+    const ctx = global.SVGContext;
+    const instance = new Knob();
+    instance._instance = ctx.group();
+
+    instance._createNeedle();
+
+    expect(instance._instance.line).toHaveBeenCalledWith(35, 35, 35, 62.5);
+  });
+});
+
+describe("Knob > _radiansToDegrees", () => {
+  it("should convert radians to degrees", () => {
+    const instance = new Knob();
+    const rad = 1.25;
+
+    const degrees = instance._radiansToDegrees(rad);
+    expect(degrees).toEqual(71.6197243913529);
+  });
+});
+
+describe("Knob > _reset", () => {
+  it("should rotate the needle back to the default position", () => {
+    const instance = new Knob();
+    instance._rotate = jest.fn();
+
+    instance._reset();
+
+    expect(instance._rotate).toHaveBeenCalledWith({ x: 35, y: 70 });
+  });
+});
+
+describe("Knob > _rotate", () => {
+  it("should rotate the needle", () => {
+    const ctx = global.SVGContext;
+    const instance = new Knob();
+    instance._instance = ctx.group();
+    instance._createNeedle();
+
+    const evt = { x: 35, y: 70 };
+    instance._rotate(evt);
+
+    expect(instance._needle.transform).toHaveBeenCalledWith({
+      cx: 35,
+      cy: 35,
+      rotation: 0
+    });
+  });
+});
+
+describe("Knob > _sendValue", () => {
+  it("should fire an event", () => {
+    const ctx = global.SVGContext;
+    const instance = new Knob();
+    instance._instance = ctx.group();
+
+    instance._sendValue();
+
+    expect(instance._instance.fire).toHaveBeenCalledWith("valueChange", {
+      value: 0
+    });
+  });
+});
+
+describe("Knob > setupEventListeners", () => {
+  it("should create some event listeners", () => {
+    const ctx = global.SVGContext;
+    const instance = new Knob(ctx);
+    instance._createGroup();
+
+    instance._setupEventListeners();
+
+    expect(instance._ctx.on).toHaveBeenCalled();
+    expect(instance._instance.on).toHaveBeenCalledTimes(3);
+  });
+});
+
+describe("Knob > _slopeToRadians", () => {
+  it("should convert a slope to radian", () => {
+    const instance = new Knob();
+
+    const radians = instance._slopeToRadians(1, 2, 3, 7);
+    expect(radians).toEqual(1.1902899496825317);
   });
 });

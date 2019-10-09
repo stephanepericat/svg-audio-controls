@@ -3,7 +3,7 @@ import AudioControl from "../src/js/AudioControl";
 describe("AudioControl > constructor", () => {
   it("should set some properties", () => {
     const options = { foo: "bar" };
-    const ctx = global.SVG;
+    const ctx = global.SVGContext;
 
     const instance = new AudioControl(ctx, options);
 
