@@ -94,3 +94,50 @@ describe("AudioControl > _sendValue", () => {
     });
   });
 });
+
+describe("AudioControl > Getters", () => {
+  test("offsetTop", () => {
+    const offsetTop = 20;
+    const instance = new AudioControl({}, { offsetTop });
+    expect(instance.offsetTop).toEqual(offsetTop);
+  });
+
+  test("offsetTop > default", () => {
+    const instance = new AudioControl();
+    expect(instance.offsetTop).toEqual(0);
+  });
+
+  test("offsetLeft", () => {
+    const offsetLeft = 20;
+    const instance = new AudioControl({}, { offsetLeft });
+    expect(instance.offsetLeft).toEqual(offsetLeft);
+  });
+
+  test("offsetLeft > default", () => {
+    const instance = new AudioControl();
+    expect(instance.offsetLeft).toEqual(0);
+  });
+
+  test("padding", () => {
+    const padding = 20;
+    const instance = new AudioControl({}, { padding });
+    expect(instance.padding).toEqual(padding);
+  });
+
+  test("padding > default", () => {
+    const instance = new AudioControl();
+    expect(instance.padding).toEqual(10);
+  });
+});
+
+describe("AudioControl > Setters", () => {
+  test("onValueChange", () => {
+    const instance = new AudioControl();
+    instance._instance = {
+      on: jest.fn()
+    };
+    const callback = jest.fn();
+    instance.onValueChange = callback;
+    expect(instance._instance.on).toHaveBeenCalledWith("valueChange", callback);
+  });
+});

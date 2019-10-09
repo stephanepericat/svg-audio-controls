@@ -156,18 +156,6 @@ export default class Knob extends AudioControl {
     return this._options.needleColor || "#f70";
   }
 
-  get offsetLeft() {
-    return this._options.offsetLeft || 0;
-  }
-
-  get offsetTop() {
-    return this._options.offsetTop || 0;
-  }
-
-  get padding() {
-    return this._options.padding || 10;
-  }
-
   get radius() {
     return this._options.radius || 50;
   }
@@ -194,9 +182,5 @@ export default class Knob extends AudioControl {
 
   set isRotating(value) {
     this._rotating = value;
-  }
-
-  set onChange(callback) {
-    this._instance.on("valueChange", callback);
   }
 }

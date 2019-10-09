@@ -25,4 +25,28 @@ export default class AudioControl {
     if (!this._instance) return;
     this._instance.fire("valueChange", { value });
   }
+
+  /**
+   * Getters
+   */
+
+  get padding() {
+    return this._options.padding || 10;
+  }
+
+  get offsetLeft() {
+    return this._options.offsetLeft || 0;
+  }
+
+  get offsetTop() {
+    return this._options.offsetTop || 0;
+  }
+
+  /**
+   * Setters
+   */
+
+  set onValueChange(callback) {
+    this._instance.on("valueChange", callback);
+  }
 }

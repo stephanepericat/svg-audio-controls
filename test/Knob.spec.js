@@ -104,39 +104,6 @@ describe("Knob > getters", () => {
     expect(instance.needleColor).toEqual("#f70");
   });
 
-  test("offsetTop", () => {
-    const offsetTop = 20;
-    const instance = new Knob({}, { offsetTop });
-    expect(instance.offsetTop).toEqual(offsetTop);
-  });
-
-  test("offsetTop > default", () => {
-    const instance = new Knob();
-    expect(instance.offsetTop).toEqual(0);
-  });
-
-  test("offsetLeft", () => {
-    const offsetLeft = 20;
-    const instance = new Knob({}, { offsetLeft });
-    expect(instance.offsetLeft).toEqual(offsetLeft);
-  });
-
-  test("offsetLeft > default", () => {
-    const instance = new Knob();
-    expect(instance.offsetLeft).toEqual(0);
-  });
-
-  test("padding", () => {
-    const padding = 20;
-    const instance = new Knob({}, { padding });
-    expect(instance.padding).toEqual(padding);
-  });
-
-  test("padding > default", () => {
-    const instance = new Knob();
-    expect(instance.padding).toEqual(10);
-  });
-
   test("radius", () => {
     const radius = 20;
     const instance = new Knob({}, { radius });
@@ -189,16 +156,6 @@ describe("Knobs > Setters", () => {
     const rotating = true;
     instance.isRotating = rotating;
     expect(instance._rotating).toEqual(rotating);
-  });
-
-  test("onChange", () => {
-    const instance = new Knob();
-    instance._instance = {
-      on: jest.fn()
-    };
-    const callback = jest.fn();
-    instance.onChange = callback;
-    expect(instance._instance.on).toHaveBeenCalledWith("valueChange", callback);
   });
 });
 

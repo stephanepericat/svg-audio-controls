@@ -20,15 +20,16 @@ const k1 = new Knob(App, {
 });
 
 k1.append();
-k1.onChange = ({ detail } = {}) => console.log("value changed", detail);
+k1.onValueChange = ({ detail } = {}) =>
+  console.log("K1 > value changed: ", detail.value);
 
 console.log("KNOB 1: ", k1);
 
 const sw1 = new Switch(App, {
   backgroundColor: "#151515",
   isHorizontal: true,
-  offsetLeft: 20,
-  offsetTop: 50,
+  offsetLeft: 120,
+  offsetTop: 80,
   padding: 5,
   size: 30,
   steps: 3,
@@ -37,6 +38,15 @@ const sw1 = new Switch(App, {
 });
 
 sw1.append();
-sw1.onChange = ({ detail } = {}) => console.log("value changed", detail);
+sw1.onValueChange = ({ detail } = {}) =>
+  console.log("SW1 value changed: ", detail.value);
 
 console.log("SWITCH 1: ", sw1);
+
+const sw2 = new Switch(App, {
+  offsetLeft: 250,
+  offsetTop: 80
+});
+sw2.append();
+sw2.onValueChange = ({ detail } = {}) =>
+  console.log("SW2 value changed: ", detail.value);
