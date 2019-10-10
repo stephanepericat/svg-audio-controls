@@ -29,14 +29,12 @@ export default class Button extends AudioControl {
   }
 
   _activate() {
-    console.log("ACTIVATE");
     this.isOn = true;
     this._button.animate(50).fill(this.activeColor);
     this._sendValue(1);
   }
 
   _deactivate(animate = true) {
-    console.log("DEACTIVATE");
     this.isOn = false;
     if (animate) {
       this._button.animate(50).fill(this.fillColor);
@@ -47,7 +45,6 @@ export default class Button extends AudioControl {
   }
 
   _onClick() {
-    console.log("ON CLICK");
     return this.isTemporary ? this._trigger() : this._toggle();
   }
 
@@ -56,14 +53,12 @@ export default class Button extends AudioControl {
   }
 
   _toggle() {
-    console.log("TOGGLE", this.isOn);
     return this.isOn ? this._deactivate() : this._activate();
   }
 
   _trigger() {
-    console.log("TRIGGER", this.isOn);
     this._activate();
-    setTimeout(() => this._deactivate(), 100);
+    setTimeout(() => this._deactivate(), 50);
   }
 
   /**
@@ -86,6 +81,10 @@ export default class Button extends AudioControl {
     return this._on;
   }
 
+  get isTemporary() {
+    return this._options.temporary || false;
+  }
+
   get radius() {
     return this._options.radius || 50;
   }
@@ -100,10 +99,6 @@ export default class Button extends AudioControl {
 
   get strokeWidth() {
     return this._options.strokeWidth || 5;
-  }
-
-  get isTemporary() {
-    return this._options.temporary || false;
   }
 
   /**
