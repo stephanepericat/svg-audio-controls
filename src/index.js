@@ -1,11 +1,28 @@
 import "./sass/index.scss";
 
 import SVG from "svg.js";
+
+import Button from "./js/Button";
 import Knob from "./js/Knob";
 import Switch from "./js/Switch";
 
 // SVG app
 const App = new SVG(document.querySelector(".container"));
+
+const b1 = new Button(App, {
+  backgroundColor: "#ccc",
+  fillColor: "#fff",
+  activeColor: "#0c0",
+  offsetLeft: 300,
+  offsetTop: 250,
+  padding: 20,
+  radius: 100,
+  strokeColor: "#111",
+  strokeWidth: 10
+});
+b1.append();
+b1.onChange = ({ detail }) => console.log("B1 value changed: ", detail.value);
+console.log("B1", b1);
 
 const k1 = new Knob(App, {
   backgroundColor: "#ccc",
