@@ -4,6 +4,7 @@ import SVG from "svg.js";
 
 import Button from "./js/Button";
 import Knob from "./js/Knob";
+import Label from "./js/Label";
 import Switch from "./js/Switch";
 
 // SVG app
@@ -23,7 +24,7 @@ const b1 = new Button(App, {
 b1.append();
 b1.onValueChange = ({ detail }) =>
   console.log("B1 value changed: ", detail.value);
-console.log("B1", b1);
+// console.log("B1", b1);
 
 const b2 = new Button(App, {
   offsetLeft: 440,
@@ -33,7 +34,20 @@ const b2 = new Button(App, {
 b2.append();
 b2.onValueChange = ({ detail }) =>
   console.log("B2 value changed: ", detail.value);
-console.log("B2", b2);
+// console.log("B2", b2);
+
+const lbl1 = new Label(App, {
+  defaultText: "0.00",
+  fontColor: "#f70",
+  fontFamily: "Roboto",
+  fontSize: 22,
+  offsetLeft: 370,
+  offsetTop: 80
+});
+
+lbl1.append();
+
+// console.log("LBL1", lbl1);
 
 const k1 = new Knob(App, {
   backgroundColor: "#ccc",
@@ -48,8 +62,10 @@ const k1 = new Knob(App, {
 });
 
 k1.append();
-k1.onValueChange = ({ detail } = {}) =>
+k1.onValueChange = ({ detail } = {}) => {
   console.log("K1 > value changed: ", detail.value);
+  lbl1.value = detail.value.toFixed(2);
+};
 
 // console.log("KNOB 1: ", k1);
 
