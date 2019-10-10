@@ -160,7 +160,7 @@ describe("Knobs > Setters", () => {
 });
 
 describe("Knob > append", () => {
-  it("should create the knobn interface", () => {
+  it("should create the knob interface", () => {
     const instance = new Knob();
     instance._createGroup = jest.fn();
     instance._createBackground = jest.fn();

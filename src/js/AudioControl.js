@@ -13,11 +13,13 @@ export default class AudioControl {
     if (!this._instance) return;
     this._background = this._instance.rect(width, height);
     this._background.fill(backgroundColor);
+    return this._background;
   }
 
   _createGroup({ left = 0, top = 0 } = {}) {
     this._instance = this._ctx.group();
     this._instance.move(left, top);
+    return this._instance;
   }
 
   _sendValue(value) {

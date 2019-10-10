@@ -20,8 +20,7 @@ export default class Switch extends AudioControl {
       width,
       height,
       backgroundColor: this.backgroundColor
-    });
-    this._background.stroke({
+    }).stroke({
       color: this.strokeColor,
       width: this.borderWidth
     });

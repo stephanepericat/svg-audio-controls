@@ -114,3 +114,135 @@ describe("Switch > Setters", () => {
     expect(instance._selected).toEqual(selection);
   });
 });
+
+describe("Switch > append", () => {
+  it("should create the switch interface", () => {
+    const instance = new Switch();
+    instance._createGroup = jest.fn();
+    instance._createBackground = jest.fn(() => ({ stroke: jest.fn() }));
+    instance._createSwitch = jest.fn();
+    instance._setupEventListeners = jest.fn();
+
+    instance.append();
+
+    expect(instance._createGroup).toHaveBeenCalled();
+    expect(instance._createBackground).toHaveBeenCalled();
+    expect(instance._createSwitch).toHaveBeenCalled();
+    expect(instance._setupEventListeners).toHaveBeenCalled();
+  });
+});
+
+describe("Switch > _createSwitch", () => {
+  it("should create the switch element", () => {
+    const ctx = global.SVGContext;
+    const instance = new Switch(ctx, {});
+    instance._instance = ctx.group();
+
+    instance._moveSwitch = jest.fn();
+    instance._createSwitch();
+
+    expect(instance._instance.rect).toHaveBeenCalledWith(16, 16);
+    expect(instance._moveSwitch).toHaveBeenCalledWith(
+      { left: 2, top: 2 },
+      false
+    );
+  });
+});
+
+describe("Switch > _getDimensions", () => {
+  it("should set a width if the switch is horizontal", () => {
+    const isHorizontal = true;
+    const size = 15;
+    const steps = 3;
+    const instance = new Switch({}, { isHorizontal, size, steps });
+
+    const dimensions = instance._getDimensions();
+    expect(dimensions).toEqual({ height: size, width: size * steps });
+  });
+
+  it("should set a height if the switch is not horizontal", () => {
+    const isHorizontal = false;
+    const size = 15;
+    const steps = 3;
+    const instance = new Switch({}, { isHorizontal, size, steps });
+
+    const dimensions = instance._getDimensions();
+    expect(dimensions).toEqual({ height: size * steps, width: size });
+  });
+});
+
+describe("Switch > _moveSwitch", () => {
+  it("should animate the transition", () => {
+    const ctx = global.SVGContext;
+    const instance = new Switch(ctx, {});
+    instance._instance = ctx.group();
+    instance._createSwitch();
+    instance._moveSwitch({});
+
+    expect(instance._switch.animate).toHaveBeenCalledWith(100);
+  });
+
+  it("should disable the transition if the flag is 'false'", () => {
+    const ctx = global.SVGContext;
+    const instance = new Switch(ctx, {});
+    const animate = false;
+    const position = { left: 15, top: 35 };
+    instance._instance = ctx.group();
+    instance._createSwitch();
+    instance._moveSwitch(position, animate);
+
+    expect(instance._switch.animate).not.toHaveBeenCalled();
+  });
+});
+
+describe("Switch > _setupEventListeners", () => {
+  it("should listen to click events", () => {
+    const ctx = global.SVGContext;
+    const instance = new Switch(ctx, {});
+    instance._instance = ctx.group();
+
+    instance._setupEventListeners();
+    expect(instance._instance.on).toHaveBeenCalled();
+  });
+});
+
+describe("Switch > _updateSelection", () => {
+  it("should update the left position, if the switch is horizontal", () => {
+    const isHorizontal = true;
+    const instance = new Switch({}, { isHorizontal });
+    instance._moveSwitch = jest.fn();
+    instance._sendValue = jest.fn();
+
+    instance._updateSelection();
+
+    expect(instance.currentSelection).toEqual(1);
+    expect(instance._moveSwitch).toHaveBeenCalledWith({ left: 22, top: 2 });
+    expect(instance._sendValue).toHaveBeenCalledWith(1);
+  });
+
+  it("should update the top position, if the switch is not horizontal", () => {
+    const isHorizontal = false;
+    const instance = new Switch({}, { isHorizontal });
+    instance._moveSwitch = jest.fn();
+    instance._sendValue = jest.fn();
+
+    instance._updateSelection();
+
+    expect(instance.currentSelection).toEqual(1);
+    expect(instance._moveSwitch).toHaveBeenCalledWith({ left: 2, top: 22 });
+    expect(instance._sendValue).toHaveBeenCalledWith(1);
+  });
+
+  it("should reset the current selection, if the current value is equal to the amount of steps", () => {
+    const isHorizontal = false;
+    const steps = 3;
+    const instance = new Switch({}, { isHorizontal, steps });
+    instance._moveSwitch = jest.fn();
+    instance._sendValue = jest.fn();
+    instance.currentSelection = steps - 1;
+
+    instance._updateSelection();
+
+    expect(instance.currentSelection).toEqual(0);
+  });
+});
