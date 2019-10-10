@@ -3,8 +3,14 @@ global.SVGContext = {
     return {
       circle: jest.fn(() => {
         return {
+          animate: jest.fn(() => {
+            return {
+              fill: jest.fn()
+            };
+          }),
           fill: jest.fn(),
           move: jest.fn(),
+          on: jest.fn(),
           stroke: jest.fn()
         };
       }),

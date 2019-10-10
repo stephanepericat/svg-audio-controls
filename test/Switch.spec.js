@@ -202,7 +202,10 @@ describe("Switch > _setupEventListeners", () => {
     instance._instance = ctx.group();
 
     instance._setupEventListeners();
-    expect(instance._instance.on).toHaveBeenCalled();
+    expect(instance._instance.on).toHaveBeenCalledWith(
+      "click",
+      expect.any(Function)
+    );
   });
 });
 

@@ -20,10 +20,7 @@ export default class Button extends AudioControl {
       backgroundColor: this.backgroundColor
     });
 
-    this._button = this._instance.circle(this.radius);
-    this._button.stroke({ width: this.strokeWidth, color: this.strokeColor });
-    this._button.move(this.padding, this.padding);
-
+    this._createButton();
     this._deactivate(false);
     this._setupEventListeners();
   }
@@ -32,6 +29,12 @@ export default class Button extends AudioControl {
     this.isOn = true;
     this._button.animate(50).fill(this.activeColor);
     this._sendValue(1);
+  }
+
+  _createButton() {
+    this._button = this._instance.circle(this.radius);
+    this._button.stroke({ width: this.strokeWidth, color: this.strokeColor });
+    this._button.move(this.padding, this.padding);
   }
 
   _deactivate(animate = true) {

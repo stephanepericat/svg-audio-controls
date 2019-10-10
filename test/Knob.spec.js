@@ -23,7 +23,7 @@ describe("Knob > constructor", () => {
   });
 });
 
-describe("Knob > getters", () => {
+describe("Knob > Getters", () => {
   test("angle", () => {
     const instance = new Knob();
     expect(instance.angle).toEqual(0);
