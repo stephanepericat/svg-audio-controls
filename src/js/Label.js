@@ -17,6 +17,10 @@ export default class Label extends AudioControl {
     this._createLabel();
   }
 
+  _addSpan(add, value) {
+    add.tspan(value.toString()).attr({ "text-anchor": "middle" });
+  }
+
   _createLabel() {
     this._label = this._instance.text("");
     this._label.font({
@@ -29,16 +33,16 @@ export default class Label extends AudioControl {
   }
 
   _setText(value) {
-    this._label.text(add =>
-      add.tspan(value.toString()).attr({ "text-anchor": "middle" })
-    );
+    this._label.text(add => this._addSpan(add, value));
   }
 
   /**
    * Getters
    */
   get defaultText() {
-    return this._options.defaultText.toString() || "";
+    return this._options.defaultText
+      ? this._options.defaultText.toString()
+      : "";
   }
 
   get fontColor() {
