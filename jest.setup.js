@@ -48,5 +48,21 @@ global.SVGContext = {
       })
     };
   }),
+  nested: jest.fn(() => {
+    return {
+      attr: jest.fn(),
+      line: jest.fn(),
+      move: jest.fn(),
+      polyline: jest.fn(() => {
+        return {
+          fill: jest.fn(),
+          stroke: jest.fn()
+        };
+      }),
+      rect: jest.fn(),
+      style: jest.fn(),
+      viewbox: jest.fn()
+    };
+  }),
   on: jest.fn()
 };

@@ -5,6 +5,7 @@ import SVG from "svg.js";
 import Button from "./js/Button";
 import Knob from "./js/Knob";
 import Label from "./js/Label";
+import Scope from "./js/Scope";
 import Switch from "./js/Switch";
 
 // SVG app
@@ -63,7 +64,7 @@ const k1 = new Knob(App, {
 
 k1.append();
 k1.onValueChange = ({ detail } = {}) => {
-  console.log("K1 > value changed: ", detail.value);
+  // console.log("K1 > value changed: ", detail.value);
   lbl1.value = detail.value.toFixed(2);
 };
 
@@ -105,3 +106,52 @@ const sw2 = new Switch(App, {
 sw2.append();
 sw2.onValueChange = ({ detail } = {}) =>
   console.log("SW2 value changed: ", detail.value);
+
+// SCOPE
+const AudioContext = window.AudioContext || window.webkitAudioContext;
+const ctx = new AudioContext();
+
+const osc = ctx.createOscillator();
+osc.type = "sine";
+osc.frequency.setValueAtTime(440, ctx.currentTime);
+osc.start();
+
+// change osc value
+k1.onValueChange = ({ detail }) => {
+  osc.frequency.setValueAtTime((detail.value / 360) * 1000, ctx.currentTime);
+  console.log("OSC FREQUENCY: ", osc.frequency.value);
+};
+
+// console.log("OSC >>", osc);
+
+const analyser = ctx.createAnalyser();
+analyser.fftSize = 1024;
+const bufferLength = analyser.frequencyBinCount;
+let dataArray = new Uint8Array(bufferLength);
+const interval = (1 / 44100) * 512 * 1000;
+osc.connect(analyser);
+
+// console.log("BUFFER LENGTH", bufferLength);
+
+const sc = new Scope(App, {
+  backgroundColor: "#333",
+  gridColor: "#999",
+  height: 130,
+  offsetLeft: 250,
+  offsetTop: 480,
+  signalColor: "cyan",
+  signalWidth: 4,
+  width: 258
+});
+sc.append();
+
+console.log("SCOPE >>>", sc);
+
+setInterval(() => {
+  analyser.getByteTimeDomainData(dataArray);
+  let points = [];
+  for (let i = 0; i < 512; i++) {
+    points[i] = [i, dataArray[i]];
+  }
+  sc.draw(points);
+}, Math.pow(interval, 2));

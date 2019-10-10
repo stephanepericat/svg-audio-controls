@@ -122,10 +122,6 @@ export default class Knob extends AudioControl {
   }
 
   get currentValue() {
-    if (this.angle === 0) {
-      return this.angle;
-    }
-
     let value = this.angle - this._zeroOffset;
 
     if (value < 0) {

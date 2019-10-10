@@ -16,8 +16,12 @@ export default class AudioControl {
     return this._background;
   }
 
-  _createGroup({ left = 0, top = 0 } = {}) {
-    this._instance = this._ctx.group();
+  _createChild({ left = 0, top = 0 } = {}) {
+    this._createGroup({ left, top }, true);
+  }
+
+  _createGroup({ left = 0, top = 0 } = {}, nested = false) {
+    this._instance = nested ? this._ctx.nested() : this._ctx.group();
     this._instance.move(left, top);
     return this._instance;
   }

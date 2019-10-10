@@ -50,11 +50,6 @@ describe("Knob > Getters", () => {
     expect(instance.centerY).toEqual(35);
   });
 
-  test("currentValue > angle === 0", () => {
-    const instance = new Knob();
-    expect(instance.currentValue).toEqual(0);
-  });
-
   test("currentValue > value > 0", () => {
     const instance = new Knob();
     instance._angle = 150;
