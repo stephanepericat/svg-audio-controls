@@ -21,8 +21,19 @@ const b1 = new Button(App, {
   strokeWidth: 10
 });
 b1.append();
-b1.onChange = ({ detail }) => console.log("B1 value changed: ", detail.value);
+b1.onValueChange = ({ detail }) =>
+  console.log("B1 value changed: ", detail.value);
 console.log("B1", b1);
+
+const b2 = new Button(App, {
+  offsetLeft: 440,
+  offsetTop: 290,
+  temporary: true
+});
+b2.append();
+b2.onValueChange = ({ detail }) =>
+  console.log("B2 value changed: ", detail.value);
+console.log("B2", b2);
 
 const k1 = new Knob(App, {
   backgroundColor: "#ccc",
