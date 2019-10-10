@@ -233,7 +233,7 @@ describe("Switch > _updateSelection", () => {
     expect(instance._sendValue).toHaveBeenCalledWith(1);
   });
 
-  it("should reset the current selection, if the current value is equal to the amount of steps", () => {
+  it("should reset the current selection, if the current value is equal to 'steps - 1'", () => {
     const isHorizontal = false;
     const steps = 3;
     const instance = new Switch({}, { isHorizontal, steps });
