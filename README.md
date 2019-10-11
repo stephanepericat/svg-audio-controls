@@ -1,16 +1,14 @@
 [![Build Status](https://travis-ci.org/stephanepericat/svg-audio-controls.svg?branch=master)](https://travis-ci.org/stephanepericat/svg-audio-controls)
 [![Coverage Status](https://coveralls.io/repos/github/stephanepericat/svg-audio-controls/badge.svg?branch=master)](https://coveralls.io/github/stephanepericat/svg-audio-controls?branch=master)
 
-# svg-audio-controls
+# SVG Audio Controls
 
-A webpack svg-audio-controls
+A set of UI controls for web-based audio apps.
 
 ## Installation
 
 ```shell
-npx degit github:stephanepericat/svg-audio-controls ./my-project
-cd ./my-project
-npm i
+npm install git+https://github.com/stephanepericat/svg-audio-controls.git
 ```
 
 ## Tasks
@@ -32,11 +30,3 @@ npm run dev
 ```shell
 npm test
 ```
-
-## Features
-
-- Webpack dev server
-- Jest unit tests
-- Sass support
-- Travis CI integration
-- Coveralls integration
