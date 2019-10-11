@@ -120,7 +120,7 @@ const led = new Led(App, {
 led.append();
 // listen to changes
 led.onValueChange = ({ detail }) =>
-  console.log("LED 1 value changed: ", detail.value);
+  console.log("value changed: ", detail.value);
 
 // turn the led on / off
 led.toggle();
