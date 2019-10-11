@@ -67,8 +67,7 @@ const kb = new Knob(App, {
 kb.append();
 
 // listen to changes
-kb.onValueChange = ({ detail } = {}) =>
-  console.log("value changed: ", detail.value);
+kb.onValueChange = ({ detail }) => console.log("value changed: ", detail.value);
 ```
 
 ### Label
@@ -183,8 +182,7 @@ const sw = new Switch(App, {
 sw.append();
 
 // listen to changes
-sw.onValueChange = ({ detail } = {}) =>
-  console.log("value changed: ", detail.value);
+sw.onValueChange = ({ detail }) => console.log("value changed: ", detail.value);
 ```
 
 ## Tasks
