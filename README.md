@@ -19,14 +19,12 @@ npm install git+https://github.com/stephanepericat/svg-audio-controls.git
 npm run build
 ```
 
-### Dev
-
-```shell
-npm run dev
-```
-
 ### Test
 
 ```shell
 npm test
 ```
+
+## Demo
+
+A demo of this library is available [here](https://github.com/stephanepericat/svg-audio-controls-demo).
