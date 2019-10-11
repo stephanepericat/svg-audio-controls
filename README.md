@@ -19,6 +19,7 @@ A configurable button. Can also be used as a trigger.
 
 ```javascript
 import SVG from "svg.js";
+import { Button } from "svg-audio-controls/src/index";
 
 const App = new SVG(document.querySelector("#container"));
 
@@ -48,6 +49,7 @@ A configurable knob.
 
 ```javascript
 import SVG from "svg.js";
+import { Knob } from "svg-audio-controls/src/index";
 
 const App = new SVG(document.querySelector("#container"));
 
@@ -76,6 +78,7 @@ A configurable label for textual display.
 
 ```javascript
 import SVG from "svg.js";
+import { Label } from "svg-audio-controls/src/index";
 
 const App = new SVG(document.querySelector("#container"));
 
@@ -101,6 +104,7 @@ A configurable LED.
 
 ```javascript
 import SVG from "svg.js";
+import { Led } from "svg-audio-controls/src/index";
 
 const App = new SVG(document.querySelector("#container"));
 
@@ -135,6 +139,7 @@ A configurable oscilloscope.
 
 ```javascript
 import SVG from "svg.js";
+import { Scope } from "svg-audio-controls/src/index";
 
 const App = new SVG(document.querySelector("#container"));
 
@@ -163,6 +168,7 @@ A configurable switch. Can be used vertically or horizontally.
 
 ```javascript
 import SVG from "svg.js";
+import { Switch } from "svg-audio-controls/src/index";
 
 const App = new SVG(document.querySelector("#container"));
 
