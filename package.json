@@ -1,6 +1,6 @@
 {
   "name": "svg-audio-controls",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A set of UI controls for web-based audio apps.",
   "main": "dist/main.js",
   "scripts": {
