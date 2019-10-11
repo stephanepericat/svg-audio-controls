@@ -134,14 +134,14 @@ osc.connect(analyser);
 // console.log("BUFFER LENGTH", bufferLength);
 
 const sc = new Scope(App, {
-  backgroundColor: "#333",
-  gridColor: "#999",
-  height: 130,
+  backgroundColor: "#ddd",
+  divisions: 6,
+  gridColor: "#f70",
   offsetLeft: 250,
   offsetTop: 480,
-  signalColor: "cyan",
+  signalColor: "#BC6C1C",
   signalWidth: 4,
-  width: 258
+  width: 400
 });
 sc.append();
 

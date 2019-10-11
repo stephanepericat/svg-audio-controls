@@ -51,7 +51,11 @@ global.SVGContext = {
   nested: jest.fn(() => {
     return {
       attr: jest.fn(),
-      line: jest.fn(),
+      line: jest.fn(() => {
+        return {
+          stroke: jest.fn()
+        };
+      }),
       move: jest.fn(),
       polyline: jest.fn(() => {
         return {
