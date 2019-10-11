@@ -19,6 +19,32 @@ describe("AudioControl > constructor", () => {
   });
 });
 
+describe("AudioControl > _createChild", () => {
+  it("should create a nested element", () => {
+    const ctx = global.SVGContext;
+    const instance = new AudioControl(ctx);
+    const options = { left: 10, top: 20 };
+    instance._createGroup = jest.fn();
+
+    instance._createChild(options);
+
+    expect(instance._createGroup).toHaveBeenCalledWith(options, true);
+  });
+
+  it("should fall back on default values", () => {
+    const ctx = global.SVGContext;
+    const instance = new AudioControl(ctx);
+    instance._createGroup = jest.fn();
+
+    instance._createChild();
+
+    expect(instance._createGroup).toHaveBeenCalledWith(
+      { left: 0, top: 0 },
+      true
+    );
+  });
+});
+
 describe("AudioControl > _createGroup", () => {
   it("should create a group", () => {
     const ctx = global.SVGContext;
@@ -32,6 +58,17 @@ describe("AudioControl > _createGroup", () => {
       options.left,
       options.top
     );
+  });
+
+  it("should create a nested element if the flag is true", () => {
+    const ctx = global.SVGContext;
+    const instance = new AudioControl(ctx);
+    const nested = true;
+    const options = { left: 10, top: 20 };
+
+    instance._createGroup(options, nested);
+
+    expect(instance._ctx.nested).toHaveBeenCalled();
   });
 
   it("should fall back on default values", () => {
