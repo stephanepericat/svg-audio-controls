@@ -1,7 +1,7 @@
 {
   "name": "svg-audio-controls",
-  "version": "1.0.2",
-  "description": "A webpack svg-audio-controls",
+  "version": "1.0.0",
+  "description": "A set of UI controls for web-based audio apps.",
   "main": "dist/main.js",
   "scripts": {
     "build": "rimraf ./dist && webpack",
