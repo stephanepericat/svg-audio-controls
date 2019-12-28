@@ -7,8 +7,16 @@ A set of UI controls for web-based audio apps, built on top of [SVG.js](https://
 
 ## Installation
 
+### Latest (compatible with @svgdotjs/svg.js@3.x)
+
 ```shell
 npm install git+https://github.com/stephanepericat/svg-audio-controls.git
+```
+
+### Legacy (compatible with svg.js@2.7.1)
+
+```shell
+npm install git+https://github.com/stephanepericat/svg-audio-controls.git#1.0.2
 ```
 
 ## Components
@@ -18,7 +26,7 @@ npm install git+https://github.com/stephanepericat/svg-audio-controls.git
 A configurable button. Can also be used as a trigger.
 
 ```javascript
-import SVG from "svg.js";
+import { SVG } from "@svgdotjs/svg.js";
 import { Button } from "svg-audio-controls/src/index";
 
 const App = new SVG(document.querySelector("#container"));
@@ -48,7 +56,7 @@ bt.onValueChange = ({ detail }) => console.log("value changed: ", detail.value);
 A configurable knob.
 
 ```javascript
-import SVG from "svg.js";
+import { SVG } from "@svgdotjs/svg.js";
 import { Knob } from "svg-audio-controls/src/index";
 
 const App = new SVG(document.querySelector("#container"));
@@ -77,7 +85,7 @@ kb.onValueChange = ({ detail }) => console.log("value changed: ", detail.value);
 A configurable label for textual display.
 
 ```javascript
-import SVG from "svg.js";
+import { SVG } from "@svgdotjs/svg.js";
 import { Label } from "svg-audio-controls/src/index";
 
 const App = new SVG(document.querySelector("#container"));
@@ -103,7 +111,7 @@ lbl.value = "3.14";
 A configurable LED.
 
 ```javascript
-import SVG from "svg.js";
+import { SVG } from "@svgdotjs/svg.js";
 import { Led } from "svg-audio-controls/src/index";
 
 const App = new SVG(document.querySelector("#container"));
@@ -138,7 +146,7 @@ led.highlightColor = "#f70";
 A configurable oscilloscope.
 
 ```javascript
-import SVG from "svg.js";
+import { SVG } from "@svgdotjs/svg.js";
 import { Scope } from "svg-audio-controls/src/index";
 
 const App = new SVG(document.querySelector("#container"));
@@ -158,7 +166,10 @@ const sc = new Scope(App, {
 sc.append();
 
 // draw graph
-let points = [[0, 0], [1, 255]];
+let points = [
+  [0, 0],
+  [1, 255]
+];
 sc.draw(points);
 ```
 
@@ -167,7 +178,7 @@ sc.draw(points);
 A configurable switch. Can be used vertically or horizontally.
 
 ```javascript
-import SVG from "svg.js";
+import { SVG } from "@svgdotjs/svg.js";
 import { Switch } from "svg-audio-controls/src/index";
 
 const App = new SVG(document.querySelector("#container"));
