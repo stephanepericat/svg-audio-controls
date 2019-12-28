@@ -1,6 +1,6 @@
 {
   "name": "svg-audio-controls",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A set of UI controls for web-based audio apps.",
   "main": "dist/main.js",
   "scripts": {
@@ -20,18 +20,18 @@
   },
   "homepage": "https://github.com/stephanepericat/svg-audio-controls#readme",
   "devDependencies": {
-    "@babel/core": "^7.6.0",
-    "@babel/preset-env": "^7.6.0",
+    "@babel/core": "^7.7.7",
+    "@babel/preset-env": "^7.7.7",
     "babel-jest": "^24.9.0",
-    "coveralls": "^3.0.6",
-    "husky": "^3.0.5",
+    "coveralls": "^3.0.9",
+    "husky": "^3.1.0",
     "jasmine-expect": "^4.0.3",
     "jest": "^24.9.0",
     "jest-transform-stub": "^2.0.0",
     "rimraf": "^3.0.0",
-    "webpack": "^4.40.2",
-    "webpack-cli": "^3.3.8",
-    "webpack-dev-server": "^3.8.0"
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.10.1"
   },
   "husky": {
     "hooks": {
