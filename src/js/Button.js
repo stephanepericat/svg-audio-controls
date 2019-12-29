@@ -13,7 +13,7 @@ export default class Button extends AudioControl {
   }
 
   append() {
-    this._createGroup({ left: this.offsetLeft, top: this.offsetTop });
+    this._createChild({ left: this.offsetLeft, top: this.offsetTop });
     this._createBackground({
       width: this.size,
       height: this.size,
@@ -22,6 +22,7 @@ export default class Button extends AudioControl {
 
     this._createButton();
     this._deactivate(false);
+    this._scale(this.size, this.size);
     this._setupEventListeners();
   }
 

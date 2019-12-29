@@ -102,7 +102,7 @@ describe("Switch > Getters", () => {
   test("switchOffset", () => {
     const size = 15;
     const instance = new Switch({}, { size });
-    expect(instance.switchOffset).toEqual(size / 10);
+    expect(instance.switchOffset).toEqual((size * 3) / 10);
   });
 });
 
@@ -118,17 +118,19 @@ describe("Switch > Setters", () => {
 describe("Switch > append", () => {
   it("should create the switch interface", () => {
     const instance = new Switch();
-    instance._createGroup = jest.fn();
+    instance._createChild = jest.fn();
     instance._createBackground = jest.fn(() => ({ stroke: jest.fn() }));
     instance._createSwitch = jest.fn();
     instance._setupEventListeners = jest.fn();
+    instance._scale = jest.fn();
 
     instance.append();
 
-    expect(instance._createGroup).toHaveBeenCalled();
+    expect(instance._createChild).toHaveBeenCalled();
     expect(instance._createBackground).toHaveBeenCalled();
     expect(instance._createSwitch).toHaveBeenCalled();
     expect(instance._setupEventListeners).toHaveBeenCalled();
+    expect(instance._scale).toHaveBeenCalled();
   });
 });
 
@@ -143,7 +145,7 @@ describe("Switch > _createSwitch", () => {
 
     expect(instance._instance.rect).toHaveBeenCalledWith(16, 16);
     expect(instance._moveSwitch).toHaveBeenCalledWith(
-      { left: 2, top: 2 },
+      { left: 6, top: 6 },
       false
     );
   });
@@ -219,7 +221,7 @@ describe("Switch > _updateSelection", () => {
     instance._updateSelection();
 
     expect(instance.currentSelection).toEqual(1);
-    expect(instance._moveSwitch).toHaveBeenCalledWith({ left: 22, top: 2 });
+    expect(instance._moveSwitch).toHaveBeenCalledWith({ left: 26, top: 6 });
     expect(instance._sendValue).toHaveBeenCalledWith(1);
   });
 
@@ -232,7 +234,7 @@ describe("Switch > _updateSelection", () => {
     instance._updateSelection();
 
     expect(instance.currentSelection).toEqual(1);
-    expect(instance._moveSwitch).toHaveBeenCalledWith({ left: 2, top: 22 });
+    expect(instance._moveSwitch).toHaveBeenCalledWith({ left: 6, top: 26 });
     expect(instance._sendValue).toHaveBeenCalledWith(1);
   });
 

@@ -32,6 +32,11 @@ export default class AudioControl {
     this._instance.fire("valueChange", { value });
   }
 
+  _scale(height, width) {
+    this._instance.attr({ height, width });
+    this._instance.style("overflow", "hidden");
+  }
+
   /**
    * Getters
    */

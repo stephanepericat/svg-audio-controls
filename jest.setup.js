@@ -43,6 +43,7 @@ global.SVGContext = {
         return {
           fill: jest.fn(),
           font: jest.fn(),
+          move: jest.fn(),
           text: jest.fn()
         };
       })

@@ -63,9 +63,37 @@ describe("Label > Getters", () => {
     expect(instance.fontSize).toEqual(16);
   });
 
+  test("height", () => {
+    const fontSize = 22;
+    const instance = new Label({}, { fontSize });
+    expect(instance.height).toEqual(fontSize + fontSize / 2);
+  });
+
+  test("labelOffsetLeft", () => {
+    const instance = new Label();
+    expect(instance.labelOffsetLeft).toEqual(instance.width / 2);
+  });
+
+  test("labelOffsetTop", () => {
+    const fontSize = 22;
+    const instance = new Label({}, { fontSize });
+    expect(instance.labelOffsetTop).toEqual(fontSize + fontSize / 8);
+  });
+
   test("value", () => {
     const instance = new Label();
     expect(instance.value).toBe(null);
+  });
+
+  test("width", () => {
+    const width = 22;
+    const instance = new Label({}, { width });
+    expect(instance.width).toEqual(width);
+  });
+
+  test("width > default", () => {
+    const instance = new Label();
+    expect(instance.width).toEqual(100);
   });
 });
 
@@ -87,15 +115,20 @@ describe("Label > append", () => {
     const instance = new Label();
     instance._createGroup = jest.fn();
     instance._createLabel = jest.fn();
+    instance._scale = jest.fn();
 
     instance.append();
 
-    expect(instance._createGroup).toHaveBeenCalledWith({
-      left: instance.offsetLeft,
-      top: instance.offsetTop
-    });
+    expect(instance._createGroup).toHaveBeenCalledWith(
+      {
+        left: instance.offsetLeft,
+        top: instance.offsetTop
+      },
+      true
+    );
 
     expect(instance._createLabel).toHaveBeenCalled();
+    expect(instance._scale).toHaveBeenCalled();
   });
 });
 
@@ -126,6 +159,10 @@ describe("Label > _createLabel", () => {
       size: 16
     });
     expect(instance._label.fill).toHaveBeenCalledWith("#000");
+    expect(instance._label.move).toHaveBeenCalledWith(
+      instance.labelOffsetLeft,
+      instance.labelOffsetTop
+    );
   });
 });
 
