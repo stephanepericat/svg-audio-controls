@@ -244,9 +244,8 @@ describe("Knob > _rotate", () => {
     instance._rotate(evt);
 
     expect(instance._needle.transform).toHaveBeenCalledWith({
-      cx: 35,
-      cy: 35,
-      rotation: 0
+      origin: "top",
+      rotate: 0
     });
   });
 });

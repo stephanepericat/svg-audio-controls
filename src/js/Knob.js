@@ -75,11 +75,9 @@ export default class Knob extends AudioControl {
 
     this.angle = this._radiansToDegrees(radian);
 
-    const { x1, y1 } = this.defaultOrientation;
     this._needle.transform({
-      rotation: this.angle - this._zeroOffset,
-      cx: x1,
-      cy: y1
+      rotate: this.angle - this._zeroOffset,
+      origin: "top"
     });
 
     this._sendValue(this.currentValue);
