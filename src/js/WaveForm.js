@@ -25,6 +25,11 @@ export default class WaveForm extends AudioControl {
   /**
    * Private methods
    */
+  _getAverages(buffer) {
+    const d = this._getData(buffer);
+    const chunks = this._splitBy(this.size, d);
+    return chunks.map(c => [Math.min(...c), Math.max(...c)]);
+  }
 
   _getData(buffer, channel = 0) {
     /**
@@ -33,12 +38,21 @@ export default class WaveForm extends AudioControl {
     return buffer.getChannelData(channel);
   }
 
-  _render(buffer) {
+  _render() {
     if (!this.channels) {
       throw new Error("AudioBuffer has no channels");
     }
 
-    console.log("WAVEFORM DATA >>>", this._getData(buffer));
+    console.log("WAVEFORM DATA >>>", this.waveFormData);
+  }
+
+  _splitBy(size, list) {
+    return list.reduce((acc, curr, i, self) => {
+      if (!(i % size)) {
+        return [...acc, self.slice(i, i + size)];
+      }
+      return acc;
+    }, []);
   }
 
   /**
@@ -70,11 +84,15 @@ export default class WaveForm extends AudioControl {
   }
 
   get size() {
-    return Math.round(this.length / this.width);
+    return Math.ceil(this.length / this.width);
   }
 
   get waveFormColor() {
     return this._options.waveFormColor || "#f70";
+  }
+
+  get waveFormData() {
+    return this.audioData ? this._getAverages(this.audioData) : [];
   }
 
   get width() {
@@ -92,6 +110,6 @@ export default class WaveForm extends AudioControl {
     }
 
     this._audioData = data;
-    this._render(this._audioData);
+    this._render();
   }
 }
