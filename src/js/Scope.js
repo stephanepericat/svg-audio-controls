@@ -59,8 +59,7 @@ export default class Scope extends AudioControl {
   }
 
   _scale() {
-    this._instance.attr({ height: this.height, width: this.width });
-    this._instance.style("overflow", "hidden");
+    super._scale(this.height, this.width);
     this._instance.viewbox(...this.viewboxDimensions);
   }
 

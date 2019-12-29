@@ -13,7 +13,7 @@ export default class Label extends AudioControl {
   }
 
   append() {
-    this._createGroup({ left: this.offsetLeft, top: this.offsetTop });
+    this._createChild({ left: this.offsetLeft, top: this.offsetTop });
     this._createLabel();
   }
 

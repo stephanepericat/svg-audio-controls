@@ -157,19 +157,21 @@ describe("Knobs > Setters", () => {
 describe("Knob > append", () => {
   it("should create the knob interface", () => {
     const instance = new Knob();
-    instance._createGroup = jest.fn();
+    instance._createChild = jest.fn();
     instance._createBackground = jest.fn();
     instance._createKnob = jest.fn();
     instance._createNeedle = jest.fn();
     instance._setupEventListeners = jest.fn();
+    instance._scale = jest.fn();
 
     instance.append();
 
-    expect(instance._createGroup).toHaveBeenCalled();
+    expect(instance._createChild).toHaveBeenCalled();
     expect(instance._createBackground).toHaveBeenCalled();
     expect(instance._createKnob).toHaveBeenCalled();
     expect(instance._createNeedle).toHaveBeenCalled();
     expect(instance._setupEventListeners).toHaveBeenCalled();
+    expect(instance._scale).toHaveBeenCalled();
   });
 });
 

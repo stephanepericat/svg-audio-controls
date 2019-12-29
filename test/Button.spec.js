@@ -129,13 +129,17 @@ describe("Button > append", () => {
     instance._createButton = jest.fn();
     instance._deactivate = jest.fn();
     instance._setupEventListeners = jest.fn();
+    instance._scale = jest.fn();
 
     instance.append();
 
-    expect(instance._createGroup).toHaveBeenCalledWith({
-      left: instance.offsetLeft,
-      top: instance.offsetTop
-    });
+    expect(instance._createGroup).toHaveBeenCalledWith(
+      {
+        left: instance.offsetLeft,
+        top: instance.offsetTop
+      },
+      true
+    );
     expect(instance._createBackground).toHaveBeenCalledWith({
       width: instance.size,
       height: instance.size,
@@ -144,6 +148,7 @@ describe("Button > append", () => {
     expect(instance._createButton).toHaveBeenCalled();
     expect(instance._deactivate).toHaveBeenCalled();
     expect(instance._setupEventListeners).toHaveBeenCalled();
+    expect(instance._scale).toHaveBeenCalled();
   });
 });
 

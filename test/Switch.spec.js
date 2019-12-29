@@ -118,17 +118,19 @@ describe("Switch > Setters", () => {
 describe("Switch > append", () => {
   it("should create the switch interface", () => {
     const instance = new Switch();
-    instance._createGroup = jest.fn();
+    instance._createChild = jest.fn();
     instance._createBackground = jest.fn(() => ({ stroke: jest.fn() }));
     instance._createSwitch = jest.fn();
     instance._setupEventListeners = jest.fn();
+    instance._scale = jest.fn();
 
     instance.append();
 
-    expect(instance._createGroup).toHaveBeenCalled();
+    expect(instance._createChild).toHaveBeenCalled();
     expect(instance._createBackground).toHaveBeenCalled();
     expect(instance._createSwitch).toHaveBeenCalled();
     expect(instance._setupEventListeners).toHaveBeenCalled();
+    expect(instance._scale).toHaveBeenCalled();
   });
 });
 

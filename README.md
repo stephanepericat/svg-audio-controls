@@ -29,7 +29,9 @@ A configurable button. Can also be used as a trigger.
 import { SVG } from "@svgdotjs/svg.js";
 import { Button } from "svg-audio-controls/src/index";
 
-const App = new SVG(document.querySelector("#container"));
+const App = SVG()
+  .addTo(document.querySelector(".container"))
+  .size("100%", "100%");
 
 const bt = new Button(App, {
   backgroundColor: "#ccc",
@@ -59,7 +61,9 @@ A configurable knob.
 import { SVG } from "@svgdotjs/svg.js";
 import { Knob } from "svg-audio-controls/src/index";
 
-const App = new SVG(document.querySelector("#container"));
+const App = SVG()
+  .addTo(document.querySelector(".container"))
+  .size("100%", "100%");
 
 const kb = new Knob(App, {
   backgroundColor: "#ccc",
@@ -88,7 +92,9 @@ A configurable label for textual display.
 import { SVG } from "@svgdotjs/svg.js";
 import { Label } from "svg-audio-controls/src/index";
 
-const App = new SVG(document.querySelector("#container"));
+const App = SVG()
+  .addTo(document.querySelector(".container"))
+  .size("100%", "100%");
 
 const lbl = new Label(App, {
   defaultText: "0.00",
@@ -114,7 +120,9 @@ A configurable LED.
 import { SVG } from "@svgdotjs/svg.js";
 import { Led } from "svg-audio-controls/src/index";
 
-const App = new SVG(document.querySelector("#container"));
+const App = SVG()
+  .addTo(document.querySelector(".container"))
+  .size("100%", "100%");
 
 const led = new Led(App, {
   backgroundColor: "#ccc",
@@ -149,7 +157,9 @@ A configurable oscilloscope.
 import { SVG } from "@svgdotjs/svg.js";
 import { Scope } from "svg-audio-controls/src/index";
 
-const App = new SVG(document.querySelector("#container"));
+const App = SVG()
+  .addTo(document.querySelector(".container"))
+  .size("100%", "100%");
 
 const sc = new Scope(App, {
   backgroundColor: "#ddd",
@@ -181,7 +191,9 @@ A configurable switch. Can be used vertically or horizontally.
 import { SVG } from "@svgdotjs/svg.js";
 import { Switch } from "svg-audio-controls/src/index";
 
-const App = new SVG(document.querySelector("#container"));
+const App = SVG()
+  .addTo(document.querySelector(".container"))
+  .size("100%", "100%");
 
 const sw = new Switch(App, {
   backgroundColor: "#151515",

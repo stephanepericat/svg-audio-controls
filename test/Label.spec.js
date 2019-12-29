@@ -90,10 +90,13 @@ describe("Label > append", () => {
 
     instance.append();
 
-    expect(instance._createGroup).toHaveBeenCalledWith({
-      left: instance.offsetLeft,
-      top: instance.offsetTop
-    });
+    expect(instance._createGroup).toHaveBeenCalledWith(
+      {
+        left: instance.offsetLeft,
+        top: instance.offsetTop
+      },
+      true
+    );
 
     expect(instance._createLabel).toHaveBeenCalled();
   });

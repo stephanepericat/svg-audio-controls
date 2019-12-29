@@ -15,7 +15,7 @@ export default class Switch extends AudioControl {
   append() {
     const { width, height } = this._getDimensions();
 
-    this._createGroup({ left: this.offsetLeft, top: this.offsetTop });
+    this._createChild({ left: this.offsetLeft, top: this.offsetTop });
     this._createBackground({
       width,
       height,
@@ -25,7 +25,7 @@ export default class Switch extends AudioControl {
       width: this.borderWidth
     });
     this._createSwitch();
-
+    this._scale(height + this.borderWidth, width + this.borderWidth);
     this._setupEventListeners();
   }
 
