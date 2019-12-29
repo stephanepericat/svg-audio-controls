@@ -39,8 +39,12 @@ export default class WaveForm extends AudioControl {
   }
 
   _render() {
-    if (!this.channels) {
-      throw new Error("AudioBuffer has no channels");
+    if (!this.audioData) {
+      throw new Error("No AudioBuffer provided");
+    }
+
+    if (!this.audioLength || !this.channels) {
+      throw new Error("AudioBuffer is empty");
     }
 
     console.log("WAVEFORM DATA >>>", this.waveFormData);
@@ -75,7 +79,7 @@ export default class WaveForm extends AudioControl {
     return this._options.height || 80;
   }
 
-  get length() {
+  get audioLength() {
     return this._audioData ? this._audioData.length : 0;
   }
 
@@ -84,7 +88,7 @@ export default class WaveForm extends AudioControl {
   }
 
   get size() {
-    return Math.ceil(this.length / this.width);
+    return Math.ceil(this.audioLength / this.width);
   }
 
   get waveFormColor() {
