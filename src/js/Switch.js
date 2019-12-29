@@ -25,13 +25,18 @@ export default class Switch extends AudioControl {
       width: this.borderWidth
     });
     this._createSwitch();
-    this._scale(height + this.borderWidth, width + this.borderWidth);
+    this._scale(height + this.borderWidth * 2, width + this.borderWidth * 2);
     this._setupEventListeners();
   }
 
   /**
    * Private methods
    */
+  _createBackground(...args) {
+    super._createBackground(...args);
+    this._background.move(this.borderWidth, this.borderWidth);
+    return this._background;
+  }
 
   _createSwitch() {
     this._switch = this._instance.rect(
@@ -119,7 +124,7 @@ export default class Switch extends AudioControl {
   }
 
   get switchOffset() {
-    return this.borderWidth / 2;
+    return this.borderWidth * 1.5;
   }
 
   /**
