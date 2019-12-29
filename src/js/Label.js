@@ -29,7 +29,7 @@ export default class Label extends AudioControl {
       size: this.fontSize
     });
     this._label.fill(this.fontColor);
-    this._label.move(this.width / 2, this.fontSize);
+    this._label.move(this.labelOffsetLeft, this.labelOffsetTop);
 
     this._setText(this.defaultText);
   }
@@ -60,7 +60,15 @@ export default class Label extends AudioControl {
   }
 
   get height() {
-    return this._options.height || 30;
+    return this.fontSize + this.fontSize / 2;
+  }
+
+  get labelOffsetLeft() {
+    return this.width / 2;
+  }
+
+  get labelOffsetTop() {
+    return this.fontSize + this.fontSize / 8;
   }
 
   get value() {
