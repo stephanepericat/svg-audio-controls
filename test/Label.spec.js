@@ -87,6 +87,7 @@ describe("Label > append", () => {
     const instance = new Label();
     instance._createGroup = jest.fn();
     instance._createLabel = jest.fn();
+    instance._scale = jest.fn();
 
     instance.append();
 
@@ -99,6 +100,7 @@ describe("Label > append", () => {
     );
 
     expect(instance._createLabel).toHaveBeenCalled();
+    expect(instance._scale).toHaveBeenCalled();
   });
 });
 
@@ -129,6 +131,10 @@ describe("Label > _createLabel", () => {
       size: 16
     });
     expect(instance._label.fill).toHaveBeenCalledWith("#000");
+    expect(instance._label.move).toHaveBeenCalledWith(
+      instance.width / 2,
+      instance.fontSize
+    );
   });
 });
 

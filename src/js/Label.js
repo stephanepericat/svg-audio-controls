@@ -14,6 +14,7 @@ export default class Label extends AudioControl {
 
   append() {
     this._createChild({ left: this.offsetLeft, top: this.offsetTop });
+    this._scale(this.height, this.width);
     this._createLabel();
   }
 
@@ -28,6 +29,7 @@ export default class Label extends AudioControl {
       size: this.fontSize
     });
     this._label.fill(this.fontColor);
+    this._label.move(this.width / 2, this.fontSize);
 
     this._setText(this.defaultText);
   }
@@ -57,8 +59,16 @@ export default class Label extends AudioControl {
     return this._options.fontSize || 16;
   }
 
+  get height() {
+    return this._options.height || 30;
+  }
+
   get value() {
     return this._value;
+  }
+
+  get width() {
+    return this._options.width || 100;
   }
 
   /**
