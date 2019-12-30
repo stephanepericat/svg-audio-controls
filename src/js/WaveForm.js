@@ -9,7 +9,6 @@ export default class WaveForm extends AudioControl {
     super(...args);
 
     this._audioData = null;
-    this._waveForm = null;
   }
 
   append() {

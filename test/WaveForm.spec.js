@@ -1,6 +1,86 @@
 import WaveForm from "../src/js/WaveForm";
 import "jasmine-expect";
 
+describe("WaveForm > constructor", () => {
+  it("should extend AudioControl", () => {
+    const options = {};
+    const ctx = global.SVGContext;
+
+    const instance = new WaveForm(ctx, options);
+
+    expect(instance._ctx).toEqual(ctx);
+    expect(instance._options).toEqual(options);
+  });
+
+  it("should set some additional properties", () => {
+    const options = {};
+    const ctx = global.SVGContext;
+
+    const instance = new WaveForm(ctx, options);
+
+    expect(instance._audioData).toBe(null);
+  });
+});
+
+describe("WaveForm > methods > append", () => {
+  it("should create a display", () => {
+    const options = {};
+    const ctx = global.SVGContext;
+
+    const instance = new WaveForm(ctx, options);
+    const createChildMock = jest.fn();
+    const createBackgroundMock = jest.fn();
+    const scaleMock = jest.fn();
+    instance._createChild = createChildMock;
+    instance._createBackground = createBackgroundMock;
+    instance._scale = scaleMock;
+
+    instance.append();
+
+    expect(createChildMock).toHaveBeenCalledWith({ left: 0, top: 0 });
+    expect(createBackgroundMock).toHaveBeenCalledWith({
+      backgroundColor: "#111",
+      height: 80,
+      width: 320
+    });
+    expect(scaleMock).toHaveBeenCalledWith(80, 320);
+  });
+});
+
+describe("WaveForm > methods > _drawFrame", () => {
+  it("should draw a line", () => {
+    const options = {};
+    const ctx = global.SVGContext;
+
+    const instance = new WaveForm(ctx, options);
+    const stroke = jest.fn();
+    const line = jest.fn(() => ({ stroke }));
+    instance._instance = { line };
+
+    const frame = [0, 1, 0, 3];
+    const color = "#ff0";
+    const width = 2;
+    instance._drawFrame(frame, color, width);
+    expect(line).toHaveBeenCalledWith(...frame);
+    expect(stroke).toHaveBeenCalledWith({ color, width });
+  });
+
+  it("should use a default width of 1", () => {
+    const options = {};
+    const ctx = global.SVGContext;
+
+    const instance = new WaveForm(ctx, options);
+    const stroke = jest.fn();
+    const line = jest.fn(() => ({ stroke }));
+    instance._instance = { line };
+
+    const frame = [0, 1, 0, 3];
+    const color = "#ff0";
+    instance._drawFrame(frame, color);
+    expect(stroke).toHaveBeenCalledWith({ color, width: 1 });
+  });
+});
+
 describe("WaveForm > Getters", () => {
   test("audioData", () => {
     const options = {};
