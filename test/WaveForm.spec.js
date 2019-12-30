@@ -112,58 +112,29 @@ describe("WaveForm > methods > _drawShadow", () => {
 
 describe("WaveForm > methods > _getAverages", () => {
   it("should get an array of average data", () => {
-    const options = { width: 22050 };
+    const options = { width: 3 };
     const ctx = global.SVGContext;
 
     const instance = new WaveForm(ctx, options);
     instance.append();
+
     const b = [1, 2, 3, 4, 5, 6];
     const c = [
       [1, 2, 3],
       [4, 5, 6]
     ];
-    const getDataMock = jest.fn(() => b);
     const splitByMock = jest.fn(() => c);
-    instance._getData = getDataMock;
     instance._splitBy = splitByMock;
-    instance.audioData = new AudioBuffer();
+    instance.audioData = b;
 
     const avg = instance._getAverages(b);
 
-    expect(getDataMock).toHaveBeenCalledWith(b);
     expect(splitByMock).toHaveBeenCalledWith(2, b);
+    console.log(splitByMock);
     expect(avg).toEqual([
       [1, 3],
       [4, 6]
     ]);
-  });
-});
-
-describe("WaveForm > methods > _getData", () => {
-  it("should get daat from an audio buffer", () => {
-    const options = {};
-    const ctx = global.SVGContext;
-
-    const instance = new WaveForm(ctx, options);
-    const b = new AudioBuffer();
-
-    const data = instance._getData(b, 1);
-
-    expect(data).toBeArrayOfSize(44100);
-  });
-
-  it("should get data from channel 0 by default", () => {
-    const options = {};
-    const ctx = global.SVGContext;
-
-    const instance = new WaveForm(ctx, options);
-    const b = {
-      getChannelData: jest.fn()
-    };
-
-    const data = instance._getData(b);
-
-    expect(b.getChannelData).toHaveBeenCalledWith(0);
   });
 });
 
@@ -310,24 +281,6 @@ describe("WaveForm > Getters", () => {
     expect(w.backgroundColor).toEqual("#111");
   });
 
-  test("channels", () => {
-    const options = {};
-    const ctx = global.SVGContext;
-    const w = new WaveForm(ctx, options);
-    w._render = jest.fn();
-    w.audioData = new AudioBuffer();
-
-    expect(w.channels).toEqual(1);
-  });
-
-  test("channels > default", () => {
-    const options = {};
-    const ctx = global.SVGContext;
-    const w = new WaveForm(ctx, options);
-
-    expect(w.channels).toEqual(0);
-  });
-
   test("hasShadow", () => {
     const options = { hasShadow: true };
     const ctx = global.SVGContext;
@@ -366,24 +319,6 @@ describe("WaveForm > Getters", () => {
     const w = new WaveForm(ctx, options);
 
     expect(w.median).toEqual(options.height / 2);
-  });
-
-  test("sampleRate", () => {
-    const options = {};
-    const ctx = global.SVGContext;
-    const w = new WaveForm(ctx, options);
-    w._render = jest.fn();
-    w.audioData = new AudioBuffer();
-
-    expect(w.sampleRate).toEqual(44100);
-  });
-
-  test("sampleRate > default", () => {
-    const options = {};
-    const ctx = global.SVGContext;
-    const w = new WaveForm(ctx, options);
-
-    expect(w.sampleRate).toEqual(0);
   });
 
   test("shadowColor", () => {
@@ -473,16 +408,5 @@ describe("WaveForm > Setters > audioData", () => {
     w.audioData = b;
 
     expect(renderMock).toHaveBeenCalledWith(b);
-  });
-
-  it("should throw an error if the data is not an AudioBuffer", () => {
-    const b = {};
-    const options = {};
-    const ctx = global.SVGContext;
-    const w = new WaveForm(ctx, options);
-
-    expect(() => (w.audioData = b)).toThrow(
-      new Error("Data is not an AudioBuffer")
-    );
   });
 });

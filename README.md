@@ -214,6 +214,10 @@ sw.append();
 sw.onValueChange = ({ detail }) => console.log("value changed: ", detail.value);
 ```
 
+### WaveForm ( _**new in 2.1.0**_ )
+
+TODO !!!
+
 ## Tasks
 
 ### Build
