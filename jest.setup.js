@@ -64,10 +64,41 @@ global.SVGContext = {
           stroke: jest.fn()
         };
       }),
-      rect: jest.fn(),
+      rect: jest.fn(() => {
+        return {
+          fill: jest.fn(),
+          move: jest.fn(() => {
+            return {
+              attr: jest.fn()
+            };
+          })
+        };
+      }),
       style: jest.fn(),
       viewbox: jest.fn()
     };
   }),
   on: jest.fn()
 };
+
+// AUDIOBUFFER MOCK
+const RATE = 44100;
+
+function AudioBuffer() {}
+
+AudioBuffer.prototype.getChannelData = function() {
+  const data = [];
+
+  for (let i = 0; i < RATE; i++) {
+    data.push((Math.random() - 0.5) * 2);
+  }
+
+  return data;
+};
+
+AudioBuffer.prototype.sampleRate = RATE;
+AudioBuffer.prototype.length = RATE;
+AudioBuffer.prototype.duration = 1.0;
+AudioBuffer.prototype.numberOfChannels = 1;
+
+global.AudioBuffer = AudioBuffer;

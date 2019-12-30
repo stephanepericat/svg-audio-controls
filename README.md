@@ -214,6 +214,53 @@ sw.append();
 sw.onValueChange = ({ detail }) => console.log("value changed: ", detail.value);
 ```
 
+### WaveForm ( _**new in 2.1.0**_ )
+
+A configurable waveform display.
+
+```javascript
+import { SVG } from "@svgdotjs/svg.js";
+import { WaveForm } from "svg-audio-controls/src/index";
+
+const App = SVG()
+  .addTo(document.querySelector(".container"))
+  .size("100%", "100%");
+
+const WaveDisplay = new WaveForm(App, {
+  backgroundColor: "#111",
+  hasShadow: true,
+  height: 250,
+  offsetLeft: 550,
+  offsetTop: 20,
+  shadowColor: "#f00",
+  shadowOpacity: 0.2,
+  waveFormColor: "#f70",
+  width: 700
+});
+
+WaveDisplay.append();
+
+const displayWaveForm = async (url, display) => {
+  const AudioContext = window.AudioContext || window.webkitAudioContext;
+  const ctx = new AudioContext();
+
+  try {
+    const ajax = await fetch(url);
+    const buffer = await ajax.arrayBuffer();
+    const audioBuffer = await ctx.decodeAudioData(buffer);
+    const audioData = audioBuffer.getChannelData(0);
+
+    // assigning the data will trigger rendering
+    display.audioData = audioData;
+  } catch (e) {
+    console.error(e.message);
+  }
+};
+
+const url = "/sounds/demo.wav";
+displayWaveForm(url, WaveDisplay);
+```
+
 ## Tasks
 
 ### Build
