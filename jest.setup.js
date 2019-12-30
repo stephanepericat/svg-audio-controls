@@ -64,7 +64,16 @@ global.SVGContext = {
           stroke: jest.fn()
         };
       }),
-      rect: jest.fn(),
+      rect: jest.fn(() => {
+        return {
+          fill: jest.fn(),
+          move: jest.fn(() => {
+            return {
+              attr: jest.fn()
+            };
+          })
+        };
+      }),
       style: jest.fn(),
       viewbox: jest.fn()
     };

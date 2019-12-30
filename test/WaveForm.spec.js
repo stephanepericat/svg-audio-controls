@@ -81,6 +81,192 @@ describe("WaveForm > methods > _drawFrame", () => {
   });
 });
 
+describe("WaveForm > methods > _drawMedianLine", () => {
+  it("should draw a median line", () => {
+    const options = {};
+    const ctx = global.SVGContext;
+
+    const instance = new WaveForm(ctx, options);
+    const drawFrameMock = jest.fn();
+    instance._drawFrame = drawFrameMock;
+
+    instance._drawMedianLine();
+
+    expect(drawFrameMock).toHaveBeenCalledWith([0, 40, 320, 40], "#fff", 1);
+  });
+});
+
+describe("WaveForm > methods > _drawShadow", () => {
+  it("should draw a shadow", () => {
+    const options = {};
+    const ctx = global.SVGContext;
+
+    const instance = new WaveForm(ctx, options);
+    instance.append();
+
+    instance._drawShadow();
+
+    expect(instance._instance.rect).toHaveBeenCalled();
+  });
+});
+
+describe("WaveForm > methods > _getAverages", () => {
+  it("should get an array of average data", () => {
+    const options = { width: 22050 };
+    const ctx = global.SVGContext;
+
+    const instance = new WaveForm(ctx, options);
+    instance.append();
+    const b = [1, 2, 3, 4, 5, 6];
+    const c = [
+      [1, 2, 3],
+      [4, 5, 6]
+    ];
+    const getDataMock = jest.fn(() => b);
+    const splitByMock = jest.fn(() => c);
+    instance._getData = getDataMock;
+    instance._splitBy = splitByMock;
+    instance.audioData = new AudioBuffer();
+
+    const avg = instance._getAverages(b);
+
+    expect(getDataMock).toHaveBeenCalledWith(b);
+    expect(splitByMock).toHaveBeenCalledWith(2, b);
+    expect(avg).toEqual([
+      [1, 3],
+      [4, 6]
+    ]);
+  });
+});
+
+describe("WaveForm > methods > _getData", () => {
+  it("should get daat from an audio buffer", () => {
+    const options = {};
+    const ctx = global.SVGContext;
+
+    const instance = new WaveForm(ctx, options);
+    const b = new AudioBuffer();
+
+    const data = instance._getData(b, 1);
+
+    expect(data).toBeArrayOfSize(44100);
+  });
+
+  it("should get data from channel 0 by default", () => {
+    const options = {};
+    const ctx = global.SVGContext;
+
+    const instance = new WaveForm(ctx, options);
+    const b = {
+      getChannelData: jest.fn()
+    };
+
+    const data = instance._getData(b);
+
+    expect(b.getChannelData).toHaveBeenCalledWith(0);
+  });
+});
+
+describe("WaveForm > methods > _getFrame", () => {
+  it("should compute a frame coordinates", () => {
+    const options = {};
+    const ctx = global.SVGContext;
+
+    const instance = new WaveForm(ctx, options);
+
+    const frame = [-2, 2];
+    const xPosition = 42;
+    const coordinates = instance._getFrame(frame, xPosition);
+
+    expect(coordinates).toEqual([xPosition, 120, xPosition, -40]);
+  });
+});
+
+describe("WaveForm > methods > _getFrames", () => {
+  it("should call '_getFrame()' on each frame", () => {
+    const options = {};
+    const ctx = global.SVGContext;
+
+    const instance = new WaveForm(ctx, options);
+    const getFrameMock = jest.fn();
+    instance._getFrame = getFrameMock;
+
+    const data = [[-2, 2]];
+    instance._getFrames(data);
+
+    expect(getFrameMock).toHaveBeenCalledWith(data[0], 0, data);
+  });
+});
+
+describe("WaveForm > methods > _render", () => {
+  it("should render a waveform", () => {
+    const options = {};
+    const ctx = global.SVGContext;
+
+    const data = [-2, 2, 3, 4];
+    const avg = [[-2, 2]];
+    const coords = [[0, 2, 0, -2]];
+
+    const instance = new WaveForm(ctx, options);
+    const getFramesMock = jest.fn(() => coords);
+    const getAveragesMock = jest.fn(() => avg);
+    const drawFrameMock = jest.fn();
+    instance._getFrames = getFramesMock;
+    instance._getAverages = getAveragesMock;
+    instance._drawFrame = drawFrameMock;
+
+    instance._render(data);
+
+    expect(getAveragesMock).toHaveBeenCalledWith(data);
+    expect(getFramesMock).toHaveBeenCalledWith(avg);
+    expect(drawFrameMock).toHaveBeenCalledWith(
+      coords[0],
+      instance.waveFormColor
+    );
+  });
+
+  it("should render a shadow, if enabled", () => {
+    const options = { hasShadow: true };
+    const ctx = global.SVGContext;
+
+    const data = [-2, 2, 3, 4];
+    const avg = [[-2, 2]];
+    const coords = [[0, 2, 0, -2]];
+
+    const instance = new WaveForm(ctx, options);
+    const drawMedianLineMock = jest.fn();
+    const drawShadowMock = jest.fn();
+    instance._getFrames = jest.fn(() => coords);
+    instance._getAverages = jest.fn(() => avg);
+    instance._drawFrame = jest.fn();
+    instance._drawMedianLine = drawMedianLineMock;
+    instance._drawShadow = drawShadowMock;
+
+    instance._render(data);
+
+    expect(drawMedianLineMock).toHaveBeenCalled();
+    expect(drawShadowMock).toHaveBeenCalled();
+  });
+});
+
+describe("WaveForm > methods > _splitBy", () => {
+  it("should create sub arrays", () => {
+    const options = {};
+    const ctx = global.SVGContext;
+
+    const instance = new WaveForm(ctx, options);
+
+    const data = [-1, 2, 3, -4, -3, 5];
+    const s = instance._splitBy(2, data);
+
+    expect(s).toEqual([
+      [-1, 2],
+      [3, -4],
+      [-3, 5]
+    ]);
+  });
+});
+
 describe("WaveForm > Getters", () => {
   test("audioData", () => {
     const options = {};
