@@ -22,6 +22,7 @@ const Template = ({
   activeColor,
   backgroundColor,
   fillColor,
+  temporary,
   offsetLeft,
   offsetTop,
   padding,
@@ -35,6 +36,7 @@ const Template = ({
     activeColor: rgb2hex(activeColor).hex,
     backgroundColor: rgb2hex(backgroundColor).hex,
     fillColor: rgb2hex(fillColor).hex,
+    temporary,
     offsetLeft,
     offsetTop,
     padding,
@@ -45,7 +47,7 @@ const Template = ({
 
   button.append();
 
-  button.onValueChange = action('onValueChange');
+  button.onValueChange = ({ detail }) => action('onValueChange')(detail.value);
 
   return App.node;
 };
@@ -56,6 +58,7 @@ Default.args = {
   activeColor: "#0c0",
   backgroundColor: "#ccc",
   fillColor: "#fff",
+  temporary: false,
   offsetLeft: 0,
   offsetTop: 0,
   padding: 10,

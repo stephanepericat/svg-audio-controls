@@ -45,7 +45,7 @@ const Template = ({
 
   knob.append();
 
-  knob.onValueChange = action('onValueChange');
+  knob.onValueChange = ({ detail }) => action('onValueChange')(detail.value);
 
   return App.node;
 };
