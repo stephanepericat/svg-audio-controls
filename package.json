@@ -8,14 +8,17 @@
     "release": "yarn build && yarn publish --patch",
     "test": "jest --verbose",
     "test:ci": "jest --coverageReporters=text-lcov | coveralls",
-    "test:watch": "jest --verbose --watch"
+    "test:watch": "jest --verbose --watch",
+    "storybook": "start-storybook -p 6006 -s ./stories/public",
+    "build-storybook": "build-storybook -s ./stories/public"
   },
   "repository": {
     "type": "git",
     "url": "ssh://git@github.com/stephanepericat/svg-audio-controls.git"
   },
   "files": [
-    "dist"
+    "dist",
+    "src"
   ],
   "author": "Stephane P. Pericat <contact@pericat.net>",
   "license": "MIT",
@@ -29,12 +32,18 @@
   "devDependencies": {
     "@babel/core": "^7.7.7",
     "@babel/preset-env": "^7.7.7",
+    "@storybook/addon-actions": "^6.1.21",
+    "@storybook/addon-essentials": "^6.1.21",
+    "@storybook/addon-links": "^6.1.21",
+    "@storybook/html": "^6.1.21",
     "babel-jest": "^24.9.0",
+    "babel-loader": "^8.2.2",
     "coveralls": "^3.0.9",
     "husky": "^3.1.0",
     "jasmine-expect": "^4.0.3",
     "jest": "^24.9.0",
     "jest-transform-stub": "^2.0.0",
+    "rgb2hex": "^0.2.5",
     "rimraf": "^3.0.0",
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10",
