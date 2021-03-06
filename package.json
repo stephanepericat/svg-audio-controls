@@ -1,6 +1,6 @@
 {
-  "name": "@stephanpericat/svg-audio-controls",
-  "version": "2.1.0",
+  "name": "@stephanepericat/svg-audio-controls",
+  "version": "2.1.1",
   "description": "A set of UI controls for web-based audio apps.",
   "main": "dist/main.js",
   "scripts": {
@@ -12,12 +12,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/stephanepericat/svg-audio-controls.git"
+    "url": "ssh://git@github.com/stephanepericat/svg-audio-controls.git"
   },
+  "files": [
+    "dist"
+  ],
   "author": "Stephane P. Pericat <contact@pericat.net>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/stephanepericat/svg-audio-controls/issues"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   },
   "homepage": "https://github.com/stephanepericat/svg-audio-controls#readme",
   "devDependencies": {
