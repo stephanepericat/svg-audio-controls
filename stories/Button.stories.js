@@ -1,35 +1,46 @@
-// import { createButton } from './Button';
 import { SVG } from "@svgdotjs/svg.js";
 import { action } from '@storybook/addon-actions';
+import rgb2hex from "rgb2hex";
 import { Button } from "../src/";
 
 export default {
   title: 'SVG Audio Controls/Button',
   argTypes: {
-    // label: { control: 'text' },
-    // primary: { control: 'boolean' },
-    // backgroundColor: { control: 'color' },
-    // size: {
-    //   control: { type: 'select', options: ['small', 'medium', 'large'] },
-    // },
-    // onClick: { action: 'onClick' },
-
+    activeColor: { control: { type: "color" } },
+    backgroundColor: { control: { type: "color" } },
+    fillColor: { control: { type: "color" } },
+    offsetLeft: { control: { type: "range", min: 0, max: 50, step: 1 } },
+    offsetTop: { control: { type: "range", min: 0, max: 50, step: 1 } },
+    padding: { control: { type: "range", min: 10, max: 50, step: 1 } },
+    radius: { control: { type: "range", min: 50, max: 200, step: 1 } },
+    strokeColor: { control: { type: "color" } },
+    strokeWidth: { control: { type: "range", min: 1, max: 25, step: 1 } }
   },
 };
 
-const Template = (args) => {
-  const App = SVG();
+const Template = ({
+  activeColor,
+  backgroundColor,
+  fillColor,
+  offsetLeft,
+  offsetTop,
+  padding,
+  radius,
+  strokeColor,
+  strokeWidth
+}) => {
+  const App = SVG().size("100%", "100%");
 
   const b1 = new Button(App, {
-    backgroundColor: "#ccc",
-    fillColor: "#fff",
-    activeColor: "#0c0",
-    offsetLeft: 0,
-    offsetTop: 0,
-    padding: 10,
-    radius: 100,
-    strokeColor: "#111",
-    strokeWidth: 10
+    activeColor: rgb2hex(activeColor).hex,
+    backgroundColor: rgb2hex(backgroundColor).hex,
+    fillColor: rgb2hex(fillColor).hex,
+    offsetLeft,
+    offsetTop,
+    padding,
+    radius,
+    strokeColor: rgb2hex(strokeColor).hex,
+    strokeWidth
   });
 
   b1.append();
@@ -41,25 +52,14 @@ const Template = (args) => {
 
 export const Default = Template.bind({});
 
-// export const Primary = Template.bind({});
-// Primary.args = {
-//   primary: true,
-//   label: 'Button',
-// };
-
-// export const Secondary = Template.bind({});
-// Secondary.args = {
-//   label: 'Button',
-// };
-
-// export const Large = Template.bind({});
-// Large.args = {
-//   size: 'large',
-//   label: 'Button',
-// };
-
-// export const Small = Template.bind({});
-// Small.args = {
-//   size: 'small',
-//   label: 'Button',
-// };
+Default.args = {
+  activeColor: "#0c0",
+  backgroundColor: "#ccc",
+  fillColor: "#fff",
+  offsetLeft: 0,
+  offsetTop: 0,
+  padding: 10,
+  radius: 100,
+  strokeColor: "#111",
+  strokeWidth: 10
+};

@@ -42,6 +42,7 @@
     "jasmine-expect": "^4.0.3",
     "jest": "^24.9.0",
     "jest-transform-stub": "^2.0.0",
+    "rgb2hex": "^0.2.5",
     "rimraf": "^3.0.0",
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10",
