@@ -5,6 +5,10 @@
 
 A set of UI controls for web-based audio apps, built on top of [SVG.js](https://svgjs.com/).
 
+## Demo
+
+A Storybook demoing the various UI components is available [here](https://spperic.at/svg-audio-controls).
+
 ## Installation
 
 ### Latest (compatible with @svgdotjs/svg.js@3.x)
@@ -282,7 +286,3 @@ npm run build
 ```shell
 npm test
 ```
-
-## Demo
-
-A demo of this library is available [here](https://github.com/stephanepericat/svg-audio-controls-demo).

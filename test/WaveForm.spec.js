@@ -130,7 +130,6 @@ describe("WaveForm > methods > _getAverages", () => {
     const avg = instance._getAverages(b);
 
     expect(splitByMock).toHaveBeenCalledWith(2, b);
-    console.log(splitByMock);
     expect(avg).toEqual([
       [1, 3],
       [4, 6]
