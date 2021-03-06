@@ -8,7 +8,9 @@
     "release": "yarn build && yarn publish --patch",
     "test": "jest --verbose",
     "test:ci": "jest --coverageReporters=text-lcov | coveralls",
-    "test:watch": "jest --verbose --watch"
+    "test:watch": "jest --verbose --watch",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "repository": {
     "type": "git",
@@ -29,7 +31,12 @@
   "devDependencies": {
     "@babel/core": "^7.7.7",
     "@babel/preset-env": "^7.7.7",
+    "@storybook/addon-actions": "^6.1.21",
+    "@storybook/addon-essentials": "^6.1.21",
+    "@storybook/addon-links": "^6.1.21",
+    "@storybook/html": "^6.1.21",
     "babel-jest": "^24.9.0",
+    "babel-loader": "^8.2.2",
     "coveralls": "^3.0.9",
     "husky": "^3.1.0",
     "jasmine-expect": "^4.0.3",
