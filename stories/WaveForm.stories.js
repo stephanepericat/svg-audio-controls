@@ -61,7 +61,9 @@ const Template = ({
 
   display.append();
 
-  const url = "/sounds/499763__phonosupf__shakuhachi-attack-9.wav";
+  const domain = window.location.href.split("iframe.html?")[0] || "/";
+  const url = `${domain}sounds/499763__phonosupf__shakuhachi-attack-9.wav`;
+
   displayWaveForm(url, display).then(console.log);
 
   return App.node;
