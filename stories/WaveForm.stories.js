@@ -2,8 +2,6 @@ import { SVG } from "@svgdotjs/svg.js";
 import rgb2hex from "rgb2hex";
 import { WaveForm } from "../src/";
 
-const url = "/sounds/499763__phonosupf__shakuhachi-attack-9.wav?raw=true";
-
 const displayWaveForm = async (url, display) => {
   const AudioContext = window.AudioContext || window.webkitAudioContext;
   const ctx = new AudioContext();
@@ -15,8 +13,10 @@ const displayWaveForm = async (url, display) => {
     const audioData = audioBuffer.getChannelData(0);
 
     display.audioData = audioData;
+
+    return url;
   } catch (e) {
-    console.error("ERROR", e.message);
+    throw new Error(e);
   }
 };
 
@@ -61,7 +61,8 @@ const Template = ({
 
   display.append();
 
-  displayWaveForm(url, display).then(() => console.log("done loading file"));
+  const url = "/sounds/499763__phonosupf__shakuhachi-attack-9.wav";
+  displayWaveForm(url, display).then(console.log);
 
   return App.node;
 };
