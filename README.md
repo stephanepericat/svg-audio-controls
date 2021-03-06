@@ -12,7 +12,7 @@ A set of UI controls for web-based audio apps, built on top of [SVG.js](https://
 Add this line to your `.yarnrc`:
 
 ```
-"@stephanepericat:registry "https://npm.pkg.github.com/stephanepericat"
+"@stephanepericat:registry" "https://npm.pkg.github.com/stephanepericat"
 ```
 
 Then install:
