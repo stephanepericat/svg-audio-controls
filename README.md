@@ -9,14 +9,22 @@ A set of UI controls for web-based audio apps, built on top of [SVG.js](https://
 
 ### Latest (compatible with @svgdotjs/svg.js@3.x)
 
+Add this line to your `.yarnrc`:
+
+```
+"@stephanepericat:registry "https://npm.pkg.github.com/stephanepericat"
+```
+
+Then install:
+
 ```shell
-npm install git+https://github.com/stephanepericat/svg-audio-controls.git
+yarn add @stephanepericat/svg-audio-controls
 ```
 
 ### Legacy (compatible with svg.js@2.7.1)
 
 ```shell
-npm install git+https://github.com/stephanepericat/svg-audio-controls.git#1.0.2
+yarn add git+https://github.com/stephanepericat/svg-audio-controls.git#1.0.2
 ```
 
 ## Components
@@ -43,7 +51,7 @@ const bt = new Button(App, {
   radius: 100,
   strokeColor: "#111",
   strokeWidth: 10,
-  temporary: false // 'true' for trigger mode
+  temporary: false, // 'true' for trigger mode
 });
 
 // append
@@ -74,7 +82,7 @@ const kb = new Knob(App, {
   padding: 20,
   radius: 100,
   strokeColor: "#111",
-  strokeWidth: 10
+  strokeWidth: 10,
 });
 
 // append
@@ -102,7 +110,7 @@ const lbl = new Label(App, {
   fontFamily: "Roboto",
   fontSize: 22,
   offsetLeft: 370,
-  offsetTop: 80
+  offsetTop: 80,
 });
 
 // append
@@ -133,7 +141,7 @@ const led = new Led(App, {
   padding: 20,
   strokeColor: "#111",
   radius: 20,
-  strokeWidth: 2
+  strokeWidth: 2,
 });
 
 // append
@@ -169,7 +177,7 @@ const sc = new Scope(App, {
   offsetTop: 480,
   signalColor: "#BC6C1C",
   signalWidth: 4,
-  width: 400
+  width: 400,
 });
 
 // append
@@ -178,7 +186,7 @@ sc.append();
 // draw graph
 let points = [
   [0, 0],
-  [1, 255]
+  [1, 255],
 ];
 sc.draw(points);
 ```
@@ -204,7 +212,7 @@ const sw = new Switch(App, {
   size: 30,
   steps: 3,
   strokeColor: "#ccc",
-  switchColor: "#666"
+  switchColor: "#666",
 });
 
 // append
@@ -235,7 +243,7 @@ const WaveDisplay = new WaveForm(App, {
   shadowColor: "#f00",
   shadowOpacity: 0.2,
   waveFormColor: "#f70",
-  width: 700
+  width: 700,
 });
 
 WaveDisplay.append();
