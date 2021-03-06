@@ -1,6 +1,6 @@
 import { SVG } from "@svgdotjs/svg.js";
-import { action } from '@storybook/addon-actions';
 import rgb2hex from "rgb2hex";
+import { action } from '@storybook/addon-actions';
 import { Knob } from "../src/";
 
 export default {
@@ -31,7 +31,7 @@ const Template = ({
 }) => {
   const App = SVG().size("100%", "100%");
 
-  const b1 = new Knob(App, {
+  const knob = new Knob(App, {
     backgroundColor: rgb2hex(backgroundColor).hex,
     fillColor: rgb2hex(fillColor).hex,
     needleColor: rgb2hex(needleColor).hex,
@@ -43,9 +43,9 @@ const Template = ({
     strokeWidth
   });
 
-  b1.append();
+  knob.append();
 
-  b1.onValueChange = action('onValueChange');
+  knob.onValueChange = action('onValueChange');
 
   return App.node;
 };

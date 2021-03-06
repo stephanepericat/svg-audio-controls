@@ -31,7 +31,7 @@ const Template = ({
 }) => {
   const App = SVG().size("100%", "100%");
 
-  const b1 = new Button(App, {
+  const button = new Button(App, {
     activeColor: rgb2hex(activeColor).hex,
     backgroundColor: rgb2hex(backgroundColor).hex,
     fillColor: rgb2hex(fillColor).hex,
@@ -43,9 +43,9 @@ const Template = ({
     strokeWidth
   });
 
-  b1.append();
+  button.append();
 
-  b1.onValueChange = action('onValueChange');
+  button.onValueChange = action('onValueChange');
 
   return App.node;
 };
