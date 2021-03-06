@@ -1,10 +1,11 @@
 {
-  "name": "svg-audio-controls",
+  "name": "@stephanpericat/svg-audio-controls",
   "version": "2.1.0",
   "description": "A set of UI controls for web-based audio apps.",
   "main": "dist/main.js",
   "scripts": {
     "build": "rimraf ./dist && webpack",
+    "release": "yarn build && yarn publish --patch",
     "test": "jest --verbose",
     "test:ci": "jest --coverageReporters=text-lcov | coveralls",
     "test:watch": "jest --verbose --watch"
