@@ -3,7 +3,7 @@ import rgb2hex from "rgb2hex";
 import { Label } from "../src/";
 
 export default {
-  title: 'SVG Audio Controls/Label',
+  title: "SVG Audio Controls/Label",
   argTypes: {
     fontColor: { control: { type: "color" } },
     fontSize: { control: { type: "range", min: 8, max: 32, step: 1 } },

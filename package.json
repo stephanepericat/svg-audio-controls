@@ -9,8 +9,8 @@
     "test": "jest --verbose",
     "test:ci": "jest --coverageReporters=text-lcov | coveralls",
     "test:watch": "jest --verbose --watch",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "storybook": "start-storybook -p 6006 -s ./stories/public",
+    "build-storybook": "build-storybook -s ./stories/public"
   },
   "repository": {
     "type": "git",

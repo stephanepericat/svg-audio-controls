@@ -1,10 +1,10 @@
 import { SVG } from "@svgdotjs/svg.js";
-import { action } from '@storybook/addon-actions';
+import { action } from "@storybook/addon-actions";
 import rgb2hex from "rgb2hex";
 import { Switch } from "../src/";
 
 export default {
-  title: 'SVG Audio Controls/Switch',
+  title: "SVG Audio Controls/Switch",
   argTypes: {
     backgroundColor: { control: { type: "color" } },
     offsetLeft: { control: { type: "range", min: 0, max: 50, step: 1 } },
@@ -44,7 +44,7 @@ const Template = ({
 
   _switch.append();
 
-  _switch.onValueChange = ({ detail }) => action('onValueChange')(detail.value);
+  _switch.onValueChange = ({ detail }) => action("onValueChange")(detail.value);
 
   return App.node;
 };

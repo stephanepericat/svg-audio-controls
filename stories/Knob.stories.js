@@ -1,10 +1,10 @@
 import { SVG } from "@svgdotjs/svg.js";
 import rgb2hex from "rgb2hex";
-import { action } from '@storybook/addon-actions';
+import { action } from "@storybook/addon-actions";
 import { Knob } from "../src/";
 
 export default {
-  title: 'SVG Audio Controls/Knob',
+  title: "SVG Audio Controls/Knob",
   argTypes: {
     backgroundColor: { control: { type: "color" } },
     fillColor: { control: { type: "color" } },
@@ -45,7 +45,7 @@ const Template = ({
 
   knob.append();
 
-  knob.onValueChange = ({ detail }) => action('onValueChange')(detail.value);
+  knob.onValueChange = ({ detail }) => action("onValueChange")(detail.value);
 
   return App.node;
 };

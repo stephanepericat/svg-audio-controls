@@ -3,7 +3,7 @@ import rgb2hex from "rgb2hex";
 import { Led } from "../src/";
 
 export default {
-  title: 'SVG Audio Controls/Led',
+  title: "SVG Audio Controls/Led",
   argTypes: {
     highlightColor: { control: { type: "color" } },
     offsetLeft: { control: { type: "range", min: 0, max: 50, step: 1 } },

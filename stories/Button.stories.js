@@ -1,10 +1,10 @@
 import { SVG } from "@svgdotjs/svg.js";
-import { action } from '@storybook/addon-actions';
+import { action } from "@storybook/addon-actions";
 import rgb2hex from "rgb2hex";
 import { Button } from "../src/";
 
 export default {
-  title: 'SVG Audio Controls/Button',
+  title: "SVG Audio Controls/Button",
   argTypes: {
     activeColor: { control: { type: "color" } },
     backgroundColor: { control: { type: "color" } },
@@ -47,7 +47,7 @@ const Template = ({
 
   button.append();
 
-  button.onValueChange = ({ detail }) => action('onValueChange')(detail.value);
+  button.onValueChange = ({ detail }) => action("onValueChange")(detail.value);
 
   return App.node;
 };
