@@ -1,6 +1,6 @@
 {
   "name": "@stephanepericat/svg-audio-controls",
-  "version": "2.1.2",
+  "version": "2.2.1",
   "description": "A set of UI controls for web-based audio apps.",
   "main": "dist/main.js",
   "scripts": {
